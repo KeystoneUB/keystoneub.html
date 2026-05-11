@@ -1,1 +1,107 @@
-dashboard.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KeystoneUB – Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg-main: #050712;
+            --bg-card: #0b0f22;
+            --border-subtle: #1d2238;
+            --accent: #0b84ff;
+            --text-main: #ffffff;
+            --text-muted: #9aa3c2;
+            --success: #2ecc71;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-main);
+            font-family: system-ui, sans-serif;
+            color: var(--text-main);
+        }
+
+        .top-nav {
+            width: 100%;
+            padding: 16px 28px;
+            background: #070a18;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .page {
+            padding: 28px;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 22px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .card-balance {
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .cc-available {
+            color: var(--success);
+            margin-top: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="top-nav">
+        <div class="brand">KeystoneUB</div>
+        <a href="index.html" style="color:#ff4b6a; text-decoration:none;">Sign Out</a>
+    </header>
+
+    <main class="page">
+        <div class="title">Welcome, Madonna F. Bilyeu</div>
+        <div class="subtitle">Here is your account overview.</div>
+
+        <div class="card">
+            <div class="card-title">Total Checking</div>
+            <div class="card-balance">$45,000.00</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">KeystoneUB Signature Visa</div>
+            <div class="card-balance">$5,000.00 balance</div>
+            <div class="cc-available">Available credit: $12,500</div>
+        </div>
+    </main>
+
+</body>
+</html>dashboard.html
