@@ -1,26 +1,115 @@
 index.html
-<script>
-    const loginForm = document.getElementById('loginForm');
-    const errorText = document.getElementById('errorText');
-    const btnText = document.getElementById('btnText');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KeystoneUB – Sign In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const username = document.getElementById('usernameField').value.trim();
-        const password = document.getElementById('passwordField').value.trim();
-
-        if (!username || !password) {
-            errorText.textContent = "Please enter both username and password.";
-            errorText.style.display = "block";
-            return;
+    <style>
+        body {
+            margin: 0;
+            background: #050712;
+            font-family: system-ui, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        errorText.style.display = "none";
-        btnText.textContent = "Signing in...";
+        .login-box {
+            width: 320px;
+            background: #0b0f22;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.4);
+        }
 
-        setTimeout(() => {
-            window.location.href = "dashboard.html";
-        }, 1000);
-    });
-</script>
+        h2 {
+            margin-top: 0;
+            margin-bottom: 18px;
+            font-size: 22px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 14px;
+            border-radius: 8px;
+            border: 1px solid #1d2238;
+            background: #0f132b;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0b84ff;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0a6ed1;
+        }
+
+        #errorText {
+            color: #ff4b6a;
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+        <h2>KeystoneUB Login</h2>
+
+        <form id="loginForm">
+            <div id="errorText">Error</div>
+
+            <input id="usernameField" type="text" placeholder="Username">
+            <input id="passwordField" type="password" placeholder="Password">
+
+            <button id="signInBtn" type="submit">
+                <span id="btnText">Sign In</span>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const errorText = document.getElementById('errorText');
+        const btnText = document.getElementById('btnText');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('usernameField').value.trim();
+            const password = document.getElementById('passwordField').value.trim();
+
+            if (!username || !password) {
+                errorText.textContent = "Please enter both username and password.";
+                errorText.style.display = "block";
+                return;
+            }
+
+            errorText.style.display = "none";
+            btnText.textContent = "Signing in...";
+
+            setTimeout(() => {
+                window.location.href = "dashboard.html";
+            }, 1000);
+        });
+    </script>
+
+</body>
+</html>
