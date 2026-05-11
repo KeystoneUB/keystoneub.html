@@ -9,14 +9,18 @@ dashboard.html
     <style>
         :root {
             --bg-main: #050712;
+            --bg-sidebar: #050814;
             --bg-card: #0b0f22;
             --border-subtle: #1d2238;
             --accent: #0b84ff;
+            --accent-soft: rgba(11,132,255,0.12);
             --text-main: #ffffff;
             --text-muted: #9aa3c2;
             --success: #2ecc71;
             --danger: #ff4b6a;
         }
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -25,9 +29,85 @@ dashboard.html
             color: var(--text-main);
         }
 
+        /* Loading */
+        #loadingOverlay {
+            position: fixed;
+            inset: 0;
+            background: #050712;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 999;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.15);
+            border-top-color: var(--accent);
+            animation: spin 0.9s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .loading-text {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Layout */
+        .app-shell { display: flex; min-height: 100vh; }
+        .sidebar {
+            width: 230px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid rgba(255,255,255,0.06);
+            padding: 18px 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-brand {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 10px;
+            border-radius: 9px;
+            font-size: 14px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            background: var(--accent-soft);
+            color: var(--text-main);
+            border: 1px solid rgba(11,132,255,0.5);
+        }
+
+        .nav-item:hover { background: rgba(255,255,255,0.05); }
+
+        .main { flex: 1; display: flex; flex-direction: column; }
+
         .top-nav {
-            width: 100%;
-            padding: 16px 28px;
+            padding: 14px 24px;
             background: #070a18;
             border-bottom: 1px solid rgba(255,255,255,0.05);
             display: flex;
@@ -35,118 +115,83 @@ dashboard.html
             align-items: center;
         }
 
-        .brand {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .page {
-            padding: 28px;
-        }
-
-        .title {
-            font-size: 26px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .subtitle {
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0b84ff, #7b61ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 28px;
+            font-weight: 600;
+        }
+
+        .page { padding: 24px; }
+        .page-title { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+        .page-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
         }
 
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
-            padding: 22px;
+            padding: 18px;
             border-radius: 14px;
-            margin-bottom: 20px;
         }
 
-        .card-title {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+        .card-title { font-size: 14px; color: var(--text-muted); }
+        .card-balance { font-size: 24px; font-weight: 600; }
+
+        .transactions-list .tx-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 13px;
         }
 
-        .card-balance {
-            font-size: 28px;
-            font-weight: 600;
-        }
+        .tx-row:last-child { border-bottom: none; }
+        .tx-name { font-weight: 500; }
+        .tx-meta { font-size: 11px; color: var(--text-muted); }
+        .tx-amount.positive { color: var(--success); }
+        .tx-amount.negative { color: var(--danger); }
 
-        .transaction-amount {
-            font-size: 20px;
-            font-weight: 600;
-        }
+        .section { display: none; }
+        .section.active { display: block; }
     </style>
 </head>
 
 <body>
 
-    <header class="top-nav">
-        <div class="brand">KeystoneUB</div>
-        <a href="index.html" style="color:#ff4b6a; text-decoration:none;">Sign Out</a>
-    </header>
+<div id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="loading-text">Loading your KeystoneUB dashboard…</div>
+</div>
 
-    <main class="page">
-        <div class="title">Welcome, Madonna F. Bilyeu</div>
-        <div class="subtitle">Here is your account overview.</div>
+<div class="app-shell" id="appShell" style="display:none;">
 
-        <!-- Checking Account -->
-        <div class="card">
-            <div class="card-title">Total Checking</div>
-            <div class="card-balance">$45,000.00</div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo-dot"></div> KeystoneUB
         </div>
 
-        <!-- Credit Card -->
-        <div class="card">
-            <div class="card-title">KeystoneUB Signature Visa</div>
-            <div class="card-balance">$5,000.00 balance</div>
-            <div style="color: var(--success); margin-top: 6px;">
-                Available credit: $12,500
-            </div>
-        </div>
+        <div class="nav-item active" data-section="dashboard">🏠 Dashboard</div>
+        <div class="nav-item" data-section="accounts">💼 Accounts</div>
+        <div class="nav-item" data-section="creditcard">💳 Credit Card</div>
+        <div class="nav-item" data-section="transactions">📜 Transactions</div>
+        <div class="nav-item" data-section="transfers">🔁 Transfers</div>
+        <div class="nav-item" data-section="profile">👤 Profile</div>
+        <div class="nav-item" data-section="settings">⚙️ Settings</div>
+    </aside>
 
-        <!-- Recent Transactions -->
-        <div class="title" style="margin-top:40px;">Recent Transactions</div>
-
-        <div class="card">
-            <div class="card-title">Incoming Wire Transfer</div>
-            <div class="transaction-amount" style="color: var(--success);">
-                +$45,000.00
-            </div>
-            <div class="subtitle" style="margin-top:6px;">
-                From: <strong>Gregory Carter</strong>
-            </div>
-            <div class="subtitle">Date: May 11, 2026</div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Starbucks</div>
-            <div class="transaction-amount" style="color: var(--danger);">
-                -$8.45
-            </div>
-            <div class="subtitle">May 10, 2026</div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Amazon Purchase</div>
-            <div class="transaction-amount" style="color: var(--danger);">
-                -$129.99
-            </div>
-            <div class="subtitle">May 9, 2026</div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Payroll Deposit</div>
-            <div class="transaction-amount" style="color: var(--success);">
-                +$2,500.00
-            </div>
-            <div class="subtitle">May 8, 2026</div>
-        </div>
-
-    </main>
-
-</body>
-</html>
+    <!-- Main -->
+    <div class="main">
+        <header class="top-nav">
+            <div>Welcome, Madonna F. Bilyeu</div>
+            <div style="display:flex; align-items:center; gap:12px;">
