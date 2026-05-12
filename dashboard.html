@@ -7,7 +7,52 @@ dashboard.html
     <title>KeystoneUB — Dashboard</title>
 
     <style>
-        body { margin:0; font-family:Arial; background:#0a0f1a; color:#fff; }
+        body { <!-- SIDEBAR NAVIGATION -->
+<aside class="kub-sidebar">
+    <div class="kub-side-logo">KUB</div>
+
+    <a class="item active">🏠 Dashboard</a>
+    <a class="item">💰 Accounts</a>
+    <a class="item">⇄ Transfers</a>
+    <a class="item">💳 Cards</a>
+    <a class="item">⭐ Rewards</a>
+    <a class="item">🔐 Security</a>
+    <a class="item">⚙️ Settings</a>
+</aside>
+
+<style>
+    .kub-sidebar {
+        width: 80px;
+        background: #0d0d0f;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-right: 1px solid #2a2a2d;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+        z-index: 999;
+    }
+
+    .kub-side-logo {
+        font-size: 22px;
+        font-weight: 800;
+        color: #d4af37;
+        margin-bottom: 30px;
+    }
+
+    .kub-sidebar .item {
+        width: 100%;
+        padding: 15px 0;
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        border-bottom: 1px solid #111622;
+        text-decoration: none;
+        display
         header { background:#111622; padding:20px; border-bottom:1px solid #c9a94a; color:#c9a94a; font-size:24px; text-align:center; }
         .container { padding:20px; }
         .card { background:#111622; border:1px solid #c9a94a; padding:20px; border-radius:10px; margin-bottom:20px; }
