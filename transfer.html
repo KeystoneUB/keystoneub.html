@@ -1,60 +1,42 @@
-transfer.html
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Transfer – KeystoneUB</title>
+<title>KeystoneUB — Transfers</title>
 <style>
-body {
-    background: #0a0f14;
-    font-family: Arial, sans-serif;
-    color: white;
-}
-.box {
-    width: 90%;
-    max-width: 500px;
-    margin: 60px auto;
-    padding: 25px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    border: 1px solid rgba(0,255,180,0.2);
-}
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: none;
-}
-button {
-    width: 100%;
-    padding: 14px;
-    background: #00e6a8;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    color: black;
-    cursor: pointer;
-}
+    body { margin:0; background:#0a0f1a; color:#fff; font-family:Arial; }
+    header { background:#111622; padding:20px; border-bottom:1px solid #c9a94a; color:#c9a94a; text-align:center; font-size:24px; }
+    .container { padding:20px; }
+    .card { background:#111622; border:1px solid #c9a94a; padding:20px; border-radius:10px; margin-bottom:20px; }
+    .card h2 { color:#c9a94a; margin:0 0 10px; }
+    input, select { width:100%; padding:10px; margin:10px 0; background:#0a0f1a; border:1px solid #c9a94a; color:#fff; }
+    button { padding:10px 20px; background:#c9a94a; border:none; color:#111622; font-weight:bold; cursor:pointer; }
 </style>
 </head>
+
 <body>
+<header>Transfers</header>
 
-<div class="box">
-    <h2>Transfer Funds</h2>
+<div class="container">
+    <div class="card">
+        <h2>Send Money</h2>
 
-    <label>From Account</label>
-    <select>
-        <option>Checking — $8,250.00</option>
-        <option>Savings — $12,400.00</option>
-    </select>
+        <label>From Account</label>
+        <select>
+            <option>Ultimate Checking — $30,000</option>
+        </select>
 
-    <label>To Account</label>
-    <input type="text" placeholder="Recipient Name or Account Number">
+        <label>To Account</label>
+        <select>
+            <option>NFCU Savings</option>
+        </select>
 
-    <label>Amount</label>
-    <input type="number" placeholder="$0.00">
+        <label>Amount</label>
+        <input type="number" placeholder="Enter amount">
 
-    <button>Send Transfer</button>
+        <button>Submit Transfer</button>
+    </div>
 </div>
 
 </body>
