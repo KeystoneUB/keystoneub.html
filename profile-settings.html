@@ -1,0 +1,171 @@
+profile-settings.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KeystoneUB — Profile Settings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b0d10;
+        color: #fff;
+    }
+
+    .header {
+        padding: 20px;
+        background: #111622;
+        border-bottom: 1px solid #2a2a2d;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .back-btn {
+        background: #0d0f14;
+        border: 1px solid #2a2a2d;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #d4af37;
+        font-weight: 600;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #d4af37;
+    }
+
+    .container {
+        margin: 20px;
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 25px;
+        border-radius: 14px;
+    }
+
+    .profile-photo {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .profile-photo img {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        border: 2px solid #d4af37;
+        object-fit: cover;
+    }
+
+    .edit-photo {
+        margin-top: 10px;
+        color: #d4af37;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .input-group {
+        margin-bottom: 18px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #d4af37;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #2a2a2d;
+        background: #0d0f14;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .save-btn {
+        width: 100%;
+        padding: 12px;
+        background: #d4af37;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #0b0d10;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .save-btn:hover {
+        background: #b8962f;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="back-btn" onclick="goBack()">← Back</div>
+    <div class="title">Profile Settings</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <!-- PROFILE PHOTO -->
+    <div class="profile-photo">
+        <img src="https://via.placeholder.com/110" alt="Profile Photo">
+        <div class="edit-photo" onclick="changePhoto()">Change Photo</div>
+    </div>
+
+    <!-- NAME -->
+    <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" value="Charles">
+    </div>
+
+    <!-- EMAIL -->
+    <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" value="charles@example.com">
+    </div>
+
+    <!-- PHONE -->
+    <div class="input-group">
+        <label>Phone Number</label>
+        <input type="text" value="(555) 123‑4567">
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="input-group">
+        <label>Home Address</label>
+        <input type="text" value="1234 Keystone Ave, Washington, DC">
+    </div>
+
+    <!-- SAVE BUTTON -->
+    <button class="save-btn" onclick="saveChanges()">Save Changes</button>
+
+</div>
+
+<script>
+    function goBack() {
+        window.location.href = "dashboard.html";
+    }
+
+    function changePhoto() {
+        alert("Photo upload feature coming soon.");
+    }
+
+    function saveChanges() {
+        alert("Your profile has been updated.");
+    }
+</script>
+
+</body>
+</html>
