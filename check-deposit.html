@@ -1,0 +1,224 @@
+check-deposit.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KeystoneUB — Check Deposit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b0d10;
+        color: #fff;
+    }
+
+    .header {
+        padding: 20px;
+        background: #111622;
+        border-bottom: 1px solid #2a2a2d;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .back-btn {
+        background: #0d0f14;
+        border: 1px solid #2a2a2d;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #d4af37;
+        font-weight: 600;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #d4af37;
+    }
+
+    .container {
+        margin: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .box {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .box h3 {
+        margin-top: 0;
+        color: #d4af37;
+        font-size: 18px;
+    }
+
+    .capture-area {
+        background: #0d0f14;
+        border: 1px dashed #2a2a2d;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+
+    .capture-area:hover {
+        background: #1a1f2b;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #d4af37;
+    }
+
+    .input-group input,
+    .input-group select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #2a2a2d;
+        background: #0d0f14;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        background: #d4af37;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #0b0d10;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .btn:hover {
+        background: #b8962f;
+    }
+
+    .summary-line {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+        font-size: 14px;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="back-btn" onclick="goBack()">← Back</div>
+    <div class="title">Mobile Check Deposit</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <!-- CHECK CAPTURE -->
+    <div class="box">
+        <h3>Capture Check Images</h3>
+
+        <div class="capture-area" onclick="captureFront()">
+            📄 Tap to Capture Front of Check
+        </div>
+
+        <div class="capture-area" onclick="captureBack()">
+            📄 Tap to Capture Back of Check
+        </div>
+
+        <button class="btn" onclick="uploadImages()">Upload Images</button>
+    </div>
+
+    <!-- DEPOSIT FORM -->
+    <div class="box">
+        <h3>Deposit Details</h3>
+
+        <div class="input-group">
+            <label>Deposit To</label>
+            <select id="depositTo">
+                <option>Keystone Checking •••• 1024 — $3,982.22</option>
+                <option>Keystone Savings •••• 9281 — $4,820.55</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Check Amount</label>
+            <input type="number" id="amount" placeholder="Enter amount">
+        </div>
+
+        <button class="btn" onclick="reviewDeposit()">Review Deposit</button>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="box">
+        <h3>Deposit Summary</h3>
+
+        <div class="summary-line">
+            <span>Deposit To:</span>
+            <span id="sumTo">—</span>
+        </div>
+
+        <div class="summary-line">
+            <span>Amount:</span>
+            <span id="sumAmount">—</span>
+        </div>
+
+        <div class="summary-line">
+            <span>Images:</span>
+            <span id="sumImages">—</span>
+        </div>
+
+        <button class="btn" onclick="submitDeposit()">Submit Deposit</button>
+    </div>
+
+</div>
+
+<script>
+    function goBack() {
+        window.location.href = "dashboard.html";
+    }
+
+    function captureFront() {
+        alert("Front check image captured.");
+    }
+
+    function captureBack() {
+        alert("Back check image captured.");
+    }
+
+    function uploadImages() {
+        alert("Images uploaded successfully.");
+        document.getElementById("sumImages").innerText = "Front + Back";
+    }
+
+    function reviewDeposit() {
+        document.getElementById("sumTo").innerText = document.getElementById("depositTo").value;
+        document.getElementById("sumAmount").innerText = "$" + document.getElementById("amount").value;
+    }
+
+    function submitDeposit() {
+        alert("Check Deposit Submitted Successfully.");
+        window.location.href = "transfer-confirmation.html";
+    }
+</script>
+
+</body>
+      </html>
