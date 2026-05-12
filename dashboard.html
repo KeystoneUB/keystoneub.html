@@ -16,7 +16,182 @@ dashboard.html
     </div>
 </div>
 
-<style>
+<style>/* ================================ ================================
+   KEYSTONEUB — GOLD SHIMMER EFFECTS
+   ================================ */
+
+/* 1. GOLD SHIMMER KEYFRAMES */
+@keyframes goldShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* 2. SHIMMER TEXT EFFECT */
+.shimmer {
+    background: linear-gradient(
+        120deg,
+        #d4af37 0%,
+        #f7e7a1 20%,
+        #d4af37 40%,
+        #b68b2e 60%,
+        #d4af37 80%
+    );
+    background-size: 200% 100%;
+    animation: goldShimmer 2.2s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 3. SHIMMER BORDER EFFECT (CARDS, PANELS) */
+.shimmer-border {
+    position: relative;
+    overflow: hidden;
+}
+.shimmer-border::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(212,175,55,0.4),
+        transparent
+    );
+    background-size: 200% 100%;
+    animation: goldShimmer 3s linear infinite;
+    z-index: -1;
+    border-radius: inherit;
+}
+
+/* 4. SHIMMER BUTTON EFFECT */
+.shimmer-btn {
+    background: linear-gradient(
+        120deg,
+        #d4af37,
+        #f7e7a1,
+        #d4af37
+    );
+    background-size: 200% 100%;
+    animation: goldShimmer 2.5s linear infinite;
+    color: #000;
+    font-weight: 700;
+    border: none;
+}
+   KEYSTONEUB — GLOBAL UI ANIMATIONS
+   ================================ */
+
+/* 1. GLOBAL PAGE FADE-IN */
+body {
+    animation: fadeIn 0.6s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. CARD HOVER LIFT */
+.card,
+.kub-account-card,
+.kub-loan-card,
+.reward-card,
+.bill-item,
+.sub-item,
+.doc-item {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover,
+.kub-account-card:hover,
+.kub-loan-card:hover,
+.reward-card:hover,
+.bill-item:hover,
+.sub-item:hover,
+.doc-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+/* 3. GOLD GLOW BUTTONS */
+button,
+.pay-btn,
+.cancel-btn,
+.doc-btn,
+.add-sub-btn {
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+button:hover,
+.pay-btn:hover,
+.cancel-btn:hover,
+.doc-btn:hover,
+.add-sub-btn:hover {
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
+}
+
+/* 4. SIDEBAR SLIDE-IN */
+.kub-sidebar {
+    animation: slideIn 0.4s ease-out;
+}
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* 5. SECTION REVEAL ANIMATION */
+.reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: revealAnim 0.6s ease forwards;
+}
+@keyframes revealAnim {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 6. QUICK ACTION MICRO-INTERACTIONS */
+.kub-quick-actions .action {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+.kub-quick-actions .action:hover {
+    transform: scale(1.08);
+    color: #d4af37;
+}
+
+/* 7. DOCUMENT VAULT HOVER */
+.doc-item {
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+.doc-item:hover {
+    background: #1a1f2b;
+    transform: translateX(4px);
+}
+
+/* 8. SUBSCRIPTION ITEM HOVER */
+.sub-item {
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+.sub-item:hover {
+    transform: translateY(-3px);
+    background: #1a1f2b;
+}
+
+/* 9. LOAN PROGRESS BAR SMOOTH FILL */
+.progress-fill {
+    transition: width 0.8s ease-out;
+}
+
+/* 10. FAQ ACCORDION SMOOTH OPEN */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+.faq-item.open .faq-answer {
+    max-height: 200px;
+}
     .kub-profile-wrapper {
         position: relative;
         display: flex;
@@ -73,7 +248,7 @@ dashboard.html
         color: #d4af37;
         font-weight: 700;
     }
-</style>
+</style>/* 
 
 <script>
     function toggleProfileMenu() {
