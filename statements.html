@@ -1,112 +1,29 @@
 statements.html
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>KeystoneUB • Statements</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-:root{
- --emerald:#00ff9c;--emerald-glow:0 0 25px #00ff9c,0 0 50px #00ff9c;
- --text-gray:#cfcfcf;--text-soft:#9a9a9a;--glass:rgba(255,255,255,0.06);
- --glass-border:rgba(255,255,255,0.12);
-}
-*{box-sizing:border-box;}
-body{
- margin:0;background:radial-gradient(circle at top,#02110b 0,#020202 45%,#000 100%);
- font-family:"Inter",sans-serif;color:var(--text-gray);
-}
-.sidebar{
- width:260px;height:100vh;background:linear-gradient(180deg,rgba(0,255,156,0.12),rgba(0,0,0,0.9));
- border-right:1px solid var(--glass-border);backdrop-filter:blur(18px);
- position:fixed;top:0;left:0;padding:24px;box-shadow:var(--emerald-glow);
- display:flex;flex-direction:column;
-}
-.logo-circle{
- width:32px;height:32px;border-radius:50%;border:2px solid var(--emerald);
- display:flex;align-items:center;justify-content:center;color:var(--emerald);
- font-weight:700;font-size:16px;box-shadow:var(--emerald-glow);
-}
-.sidebar h2{font-size:20px;margin:0;color:var(--emerald);text-shadow:var(--emerald-glow);}
-.sidebar-sub{font-size:11px;color:var(--text-soft);margin-top:2px;}
-.sidebar-header{display:flex;align-items:center;gap:10px;margin-bottom:30px;}
-.nav-item{
- padding:10px 10px;margin-bottom:6px;border-radius:10px;cursor:pointer;transition:.25s;
- font-size:14px;display:flex;align-items:center;gap:10px;color:var(--text-gray);
-}
-.nav-item span.icon{width:20px;text-align:center;font-size:15px;}
-.nav-item.active,.nav-item:hover{background:rgba(0,255,156,0.12);box-shadow:var(--emerald-glow);color:var(--emerald);}
-.sidebar-footer{margin-top:auto;font-size:11px;color:var(--text-soft);opacity:.8;}
-.main{margin-left:260px;padding:32px 40px 40px;}
-h1{margin:0 0 6px;font-size:22px;color:var(--emerald);text-shadow:var(--emerald-glow);}
-p{margin:0 0 18px;font-size:13px;color:var(--text-soft);}
-.card{
- background:var(--glass);border:1px solid var(--glass-border);border-radius:18px;
- padding:20px 20px 18px;margin-bottom:20px;backdrop-filter:blur(18px);box-shadow:var(--emerald-glow);
-}
-table{
- width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;
-}
-th,td{
- padding:6px 4px;border-bottom:1px solid rgba(255,255,255,0.06);
-}
-th{font-size:11px;color:var(--text-soft);text-align:left;}
-a{color:var(--emerald);text-decoration:none;font-size:12px;}
-a:hover{text-decoration:underline;}
-@media(max-width:900px){.sidebar{display:none;}.main{margin-left:0;padding:20px;}}
-</style>
-</head>
-<body>
-<div class="sidebar">
-  <div class="sidebar-header">
-    <div class="logo-circle">K</div>
-    <div>
-      <h2>KeystoneUB</h2>
-      <div class="sidebar-sub">Digital Banking Suite</div>
-    </div>
-  </div>
-  <div class="nav-item"><span class="icon">🏠</span><a href="dashboard.html">Dashboard</a></div>
-  <div class="nav-item"><span class="icon">🏦</span><a href="accounts.html">Accounts</a></div>
-  <div class="nav-item"><span class="icon">💳</span><a href="cards.html">Cards</a></div>
-  <div class="nav-item"><span class="icon">🔁</span><a href="transfers.html">Transfers</a></div>
-  <div class="nav-item active"><span class="icon">🧾</span>Statements</div>
-  <div class="nav-item"><span class="icon">👤</span><a href="profile.html">Profile</a></div>
-  <div class="nav-item"><span class="icon">🚪</span><a href="logout.html">Logout</a></div>
-  <div class="sidebar-footer">KeystoneUB • Secure Session</div>
-</div>
-
-<div class="main">
-  <h1>Statements • Madonna F. Bilyeu</h1>
-  <p>Download your monthly KeystoneUB statements.</p>
-
-  <div class="card">
-    <table>
-      <thead>
-        <tr>
-          <th>Account</th>
-          <th>Period</th>
-          <th>Closing balance</th>
-          <th>Download</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Checking • **** 1024</td>
-          <td>April 2026</td>
-          <td>$44,250.00</td>
-          <td><a href="#">PDF</a></td>
-        </tr>
-        <tr>
-          <td>Checking • **** 1024</td>
-          <td>March 2026</td>
-          <td>$41,900.00</td>
-          <td><a href="#">PDF</a></td>
-        </tr>
-        <tr>
-          <td>Visa • **** 4821</td>
-          <td>April 2026</td>
-          <td>$5,000.00</td>
-          <td><a href="#">PDF</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<!DOCTYPE html>
+‎<html lang="en">
+‎<head>
+‎<meta charset="UTF-8">
+‎<title>KeystoneUB — Statements</title>
+‎<style>
+‎    body { margin:0; background:#0a0f1a; color:#fff; font-family:Arial; }
+‎    header { background:#111622; padding:20px; border-bottom:1px solid #c9a94a; color:#c9a94a; text-align:center; font-size:24px; }
+‎    .container { padding:20px; }
+‎    .card { background:#111622; border:1px solid #c9a94a; padding:20px; border-radius:10px; margin-bottom:20px; }
+‎    .card h2 { color:#c9a94a; margin:0 0 10px; }
+‎</style>
+‎</head>
+‎
+‎<body>
+‎<header>Statements</header>
+‎
+‎<div class="container">
+‎    <div class="card">
+‎        <h2>Available Statements</h2>
+‎        <p>• April 2026</p>
+‎        <p>• March 2026</p>
+‎        <p>• February 2026</p>
+‎    </div>
+‎</div>
+‎
+‎</body>
+‎</html>
