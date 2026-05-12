@@ -2,108 +2,148 @@ index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keystone Ultimate Bank — Login</title>
+<meta charset="UTF-8">
+<title>KeystoneUB — Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0a0f1a; /* deep navy */
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b0d10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #fff;
+    }
 
-        .login-box {
-            background: #111622; /* charcoal */
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid #c9a94a; /* brushed gold */
-            width: 320px;
-            text-align: center;
-        }
+    .login-container {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 40px;
+        width: 350px;
+        border-radius: 14px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.4);
+        animation: fadeIn 0.6s ease;
+    }
 
-        h1 {
-            color: #c9a94a;
-            margin-bottom: 25px;
-            font-size: 22px;
-        }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: #0a0f1a;
-            border: 1px solid #c9a94a;
-            border-radius: 6px;
-            color: #ffffff;
-        }
+    .logo {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 26px;
+        font-weight: 800;
+        color: #d4af37;
+    }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #c9a94a;
-            border: none;
-            border-radius: 6px;
-            color: #111622;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+    .input-group {
+        margin-bottom: 18px;
+    }
 
-        button:hover {
-            opacity: 0.9;
-        }
+    .input-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #d4af37;
+    }
 
-        .link {
-            margin-top: 15px;
-            display: block;
-            color: #c9a94a;
-            text-decoration: none;
-            font-size: 14px;
-        }
+    .input-group input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #2a2a2d;
+        background: #0d0f14;
+        color: #fff;
+        font-size: 14px;
+    }
 
-        .error {
-            color: #ff6b6b;
-            margin-top: 10px;
-            display: none;
-        }
-    </style>
+    .password-wrapper {
+        position: relative;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #d4af37;
+        font-size: 14px;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 12px;
+        background: #d4af37;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #0b0d10;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .login-btn:hover {
+        background: #b8962f;
+    }
+
+    .forgot {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 13px;
+        color: #bfbfbf;
+        cursor: pointer;
+    }
+
+    .forgot:hover {
+        color: #d4af37;
+    }
+</style>
 </head>
 
 <body>
 
-<div class="login-box">
-    <h1>KeystoneUB Login</h1>
+<div class="login-container">
+    <div class="logo">KeystoneUB</div>
 
-    <input id="username" type="text" placeholder="Username">
-    <input id="password" type="password" placeholder="Password">
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" placeholder="Enter username">
+    </div>
 
-    <button onclick="login()">Sign In</button>
+    <div class="input-group password-wrapper">
+        <label>Password</label>
+        <input type="password" id="passwordInput" placeholder="Enter password">
+        <span class="toggle-password" onclick="togglePassword()">Show</span>
+    </div>
 
-    <div id="error" class="error">Invalid username or password</div>
+    <button class="login-btn" onclick="login()">Sign In</button>
 
-    <a class="link" href="forgot.html">Forgot Password?</a>
+    <div class="forgot">Forgot Password?</div>
 </div>
 
 <script>
-    function login() {
-        const user = document.getElementById("username").value.trim();
-        const pass = document.getElementById("password").value.trim();
-        const error = document.getElementById("error");
+    function togglePassword() {
+        const input = document.getElementById("passwordInput");
+        const toggle = document.querySelector(".toggle-password");
 
-        if (user === "" || pass === "") {
-            error.textContent = "Please enter both fields";
-            error.style.display = "block";
-            return;
+        if (input.type === "password") {
+            input.type = "text";
+            toggle.textContent = "Hide";
+        } else {
+            input.type = "password";
+            toggle.textContent = "Show";
         }
+    }
 
-        // Demo login — accepts ANY username/password
-        window.location.href = "dashboard.html";
+    function login() {
+        window.location.href = "dashboard.html"; 
     }
 </script>
 
