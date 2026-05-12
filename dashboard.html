@@ -16,9 +16,80 @@ dashboard.html
     </style>
 </head>
 
-<body>
-<header>KEYSTONE ULTIMATE BANK — Dashboard</header>
+<!-- NEW KEYSTONE HEADER -->
+<header class="kub-header">
+    <div class="kub-left">
+        <div class="kub-logo">Keystone <span>Ultimate Bank</span></div>
+        <div class="kub-greeting">Welcome, <strong>Madonna F. Bilyeu</strong></div>
+    </div>
 
+    <div class="kub-right">
+        <i class="icon-bell"></i>
+        <i class="icon-settings"></i>
+        <div class="kub-avatar">M</div>
+    </div>
+</header>
+
+<style>
+    .kub-header {
+        width: 100%;
+        padding: 18px 22px;
+        background: #0d0d0f;
+        border-bottom: 1px solid #2a2a2d;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .kub-logo {
+        font-size: 20px;
+        font-weight: 700;
+        color: #d4af37;
+    }
+
+    .kub-logo span {
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .kub-greeting {
+        font-size: 14px;
+        margin-top: 4px;
+        color: #cfcfcf;
+    }
+
+    .kub-left {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .kub-right {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .kub-avatar {
+        width: 36px;
+        height: 36px;
+        background: #d4af37;
+        color: #000;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .icon-bell, .icon-settings {
+        font-size: 20px;
+        cursor: pointer;
+        color: #e0e0e0;
+    }
+</style>
 <div class="container">
     <nav>
         <a href="checking.html">Checking</a>
