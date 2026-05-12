@@ -1,0 +1,238 @@
+external-transfer.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KeystoneUB — External Transfers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b0d10;
+        color: #fff;
+    }
+
+    .header {
+        padding: 20px;
+        background: #111622;
+        border-bottom: 1px solid #2a2a2d;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .back-btn {
+        background: #0d0f14;
+        border: 1px solid #2a2a2d;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #d4af37;
+        font-weight: 600;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #d4af37;
+    }
+
+    .container {
+        margin: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .box {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .box h3 {
+        margin-top: 0;
+        color: #d4af37;
+        font-size: 18px;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #d4af37;
+    }
+
+    .input-group input,
+    .input-group select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #2a2a2d;
+        background: #0d0f14;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .add-btn, .confirm-btn {
+        width: 100%;
+        padding: 12px;
+        background: #d4af37;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #0b0d10;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .add-btn:hover, .confirm-btn:hover {
+        background: #b8962f;
+    }
+
+    .summary-line {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+        font-size: 14px;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="back-btn" onclick="goBack()">← Back</div>
+    <div class="title">External Transfers</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <!-- ADD EXTERNAL ACCOUNT -->
+    <div class="box">
+        <h3>Add External Account</h3>
+
+        <div class="input-group">
+            <label>Bank Name</label>
+            <input type="text" id="bankName" placeholder="e.g., Bank of America">
+        </div>
+
+        <div class="input-group">
+            <label>Routing Number</label>
+            <input type="text" id="routing" placeholder="9-digit routing number">
+        </div>
+
+        <div class="input-group">
+            <label>Account Number</label>
+            <input type="text" id="accountNumber" placeholder="Account number">
+        </div>
+
+        <div class="input-group">
+            <label>Account Type</label>
+            <select id="accountType">
+                <option>Checking</option>
+                <option>Savings</option>
+            </select>
+        </div>
+
+        <button class="add-btn" onclick="addExternal()">Add External Account</button>
+    </div>
+
+    <!-- TRANSFER FORM -->
+    <div class="box">
+        <h3>Transfer To/From External Account</h3>
+
+        <div class="input-group">
+            <label>From Account</label>
+            <select id="fromAccount">
+                <option>Keystone Checking •••• 1024 — $3,982.22</option>
+                <option>Keystone Savings •••• 9281 — $4,820.55</option>
+                <option>External — Bank of America •••• 2219</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>To Account</label>
+            <select id="toAccount">
+                <option>External — Bank of America •••• 2219</option>
+                <option>Keystone Checking •••• 1024 — $3,982.22</option>
+                <option>Keystone Savings •••• 9281 — $4,820.55</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Amount</label>
+            <input type="number" id="amount" placeholder="Enter amount">
+        </div>
+
+        <div class="input-group">
+            <label>Transfer Date</label>
+            <input type="date" id="date">
+        </div>
+
+        <button class="confirm-btn" onclick="reviewTransfer()">Review Transfer</button>
+    </div>
+
+    <!-- SUMMARY BOX -->
+    <div class="box">
+        <h3>Transfer Summary</h3>
+
+        <div class="summary-line">
+            <span>From:</span>
+            <span id="sumFrom">—</span>
+        </div>
+
+        <div class="summary-line">
+            <span>To:</span>
+            <span id="sumTo">—</span>
+        </div>
+
+        <div class="summary-line">
+            <span>Amount:</span>
+            <span id="sumAmount">—</span>
+        </div>
+
+        <div class="summary-line">
+            <span>Date:</span>
+            <span id="sumDate">—</span>
+        </div>
+
+        <button class="confirm-btn" onclick="submitTransfer()">Submit Transfer</button>
+    </div>
+
+</div>
+
+<script>
+    function goBack() {
+        window.location.href = "dashboard.html";
+    }
+
+    function addExternal() {
+        alert("External account added successfully.");
+    }
+
+    function reviewTransfer() {
+        document.getElementById("sumFrom").innerText = document.getElementById("fromAccount").value;
+        document.getElementById("sumTo").innerText = document.getElementById("toAccount").value;
+        document.getElementById("sumAmount").innerText = "$" + document.getElementById("amount").value;
+        document.getElementById("sumDate").innerText = document.getElementById("date").value;
+    }
+
+    function submitTransfer() {
+        alert("External transfer submitted successfully.");
+        window.location.href = "transfer-confirmation.html";
+    }
+</script>
+
+</body>
+</html> 
