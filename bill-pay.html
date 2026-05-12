@@ -1,0 +1,294 @@
+bill-pay.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KeystoneUB — Bill Pay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b0d10;
+        color: #fff;
+    }
+
+    .header {
+        padding: 20px;
+        background: #111622;
+        border-bottom: 1px solid #2a2a2d;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .back-btn {
+        background: #0d0f14;
+        border: 1px solid #2a2a2d;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #d4af37;
+        font-weight: 600;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #d4af37;
+    }
+
+    .container {
+        margin: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .box {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .box h3 {
+        margin-top: 0;
+        color: #d4af37;
+        font-size: 18px;
+    }
+
+    .payee-item {
+        background: #0d0f14;
+        border: 1px solid #2a2a2d;
+        padding: 12px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #d4af37;
+    }
+
+    .input-group input,
+    .input-group select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #2a2a2d;
+        background: #0d0f14;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        background: #d4af37;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #0b0d10;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .btn:hover {
+        background: #b8962f;
+    }
+
+    .summary-line {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+        font-size: 14px;
+    }
+
+    .history-item {
+        background: #0d0f14;
+        border: 1px solid #2a2a2d;
+        padding: 12px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .amount-neg {
+        color: #e53935;
+        font-weight: 700;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="back-btn" onclick="goBack()">← Back</div>
+    <div class="title">Bill Pay Center</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <!-- PAYEES -->
+    <div class="box">
+        <h3>Your Payees</h3>
+
+        <div class="payee-item">
+            <strong>Con Edison</strong><br>
+            Utilities — Account •••• 8831
+        </div>
+
+        <div class="payee-item">
+            <strong>Spectrum Internet</strong><br>
+            Internet — Account •••• 2219
+        </div>
+
+        <div class="payee-item">
+            <strong>AT&T Mobile</strong><br>
+            Wireless — Account •••• 5521
+        </div>
+
+        <div class="payee-item">
+            <strong>NYC Water</strong><br>
+            Water — Account •••• 1024
+        </div>
+
+        <button class="btn" onclick="addPayee()">Add New Payee</button>
+    </div>
+
+    <!-- PAYMENT FORM -->
+    <div class="box">
+        <h3>Schedule a Payment</h3>
+
+        <div class="input-group">
+            <label>Select Payee</label>
+            <select id="payee">
+                <option>Con Edison</option>
+                <option>Spectrum Internet</option>
+                <option>AT&T Mobile</option>
+                <option>NYC Water</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>From Account</label>
+            <select id="fromAccount">
+                <option>Keystone Checking •••• 1024 — $3,982.22</option>
+                <option>Keystone Savings •••• 9281 — $4,820.55</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Amount</label>
+            <input type="number" id="amount" placeholder="Enter amount">
+        </div>
+
+        <div class="input-group">
+            <label>Payment Date</label>
+            <input type="date" id="date">
+        </div>
+
+        <div class="input-group">
+            <label>Recurring</label>
+            <select id="recurring">
+                <option>One‑time</option>
+                <option>Weekly</option>
+                <option>Bi‑weekly</option>
+                <option>Monthly</option>
+            </select>
+        </div>
+
+        <button class="btn" onclick="reviewPayment()">Review Payment</button>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="box">
+        <h3>Payment Summary</h3>
+
+        <div class="summary-line">
+            <span>Payee:</span>
+            <span id="sumPayee">—</span>
+        </div>
+
+        <div class="summary-line">
+            <span>From:</span>
+            <span id="sumFrom">—</span>
+        </div>
+
+        <div class="summary-line">
+            <span>Amount:</span>
+            <span id="sumAmount">—</span>
+        </div>
+
+        <div class="summary-line">
+            <span>Date:</span>
+            <span id="sumDate">—</span>
+        </div>
+
+        <div class="summary-line">
+            <span>Recurring:</span>
+            <span id="sumRecurring">—</span>
+        </div>
+
+        <button class="btn" onclick="submitPayment()">Submit Payment</button>
+    </div>
+
+    <!-- PAYMENT HISTORY -->
+    <div class="box">
+        <h3>Payment History</h3>
+
+        <div class="history-item">
+            <span>Con Edison — May 10</span>
+            <span class="amount-neg">- $120.00</span>
+        </div>
+
+        <div class="history-item">
+            <span>Spectrum Internet — May 5</span>
+            <span class="amount-neg">- $89.99</span>
+        </div>
+
+        <div class="history-item">
+            <span>AT&T Mobile — May 2</span>
+            <span class="amount-neg">- $65.00</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function goBack() {
+        window.location.href = "dashboard.html";
+    }
+
+    function addPayee() {
+        alert("Payee creation form coming soon.");
+    }
+
+    function reviewPayment() {
+        document.getElementById("sumPayee").innerText = document.getElementById("payee").value;
+        document.getElementById("sumFrom").innerText = document.getElementById("fromAccount").value;
+        document.getElementById("sumAmount").innerText = "$" + document.getElementById("amount").value;
+        document.getElementById("sumDate").innerText = document.getElementById("date").value;
+        document.getElementById("sumRecurring").innerText = document.getElementById("recurring").value;
+    }
+
+    function submitPayment() {
+        alert("Payment Scheduled Successfully.");
+        window.location.href = "transfer-confirmation.html";
+    }
+</script>
+
+</body>
+  </html>
