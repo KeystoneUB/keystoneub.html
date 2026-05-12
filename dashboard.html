@@ -254,3 +254,64 @@ dashboard.html
     .negative { color: #ff5252; }
     .neutral { color: #d4af37; }
 </style>
+<!-- QUICK ACTIONS ROW -->
+<section class="kub-quick-actions">
+    <div class="action">
+        <div class="icon">⇄</div>
+        <p>Transfer</p>
+    </div>
+
+    <div class="action">
+        <div class="icon">⬆️</div>
+        <p>Deposit</p>
+    </div>
+
+    <div class="action">
+        <div class="icon">💳</div>
+        <p>Pay Bill</p>
+    </div>
+
+    <div class="action">
+        <div class="icon">⭐</div>
+        <p>Rewards</p>
+    </div>
+</section>
+
+<style>
+    .kub-quick-actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        margin-top: 10px;
+        background: #0d0d0f;
+        border-top: 1px solid #2a2a2d;
+        border-bottom: 1px solid #2a2a2d;
+    }
+
+    .kub-quick-actions .action {
+        text-align: center;
+        color: #fff;
+        width: 25%;
+        cursor: pointer;
+    }
+
+    .kub-quick-actions .icon {
+        background: #111622;
+        border: 1px solid #d4af37;
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 8px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+    }
+
+    .kub-quick-actions p {
+        margin: 0;
+        font-size: 14px;
+        color: #d4af37;
+        font-weight: 600;
+    }
+</style>
