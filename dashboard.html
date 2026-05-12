@@ -1,7 +1,96 @@
 dashboard.html
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> <!-- PROFILE DROPDOWN -->
+<div class="kub-profile-wrapper">
+    <div class="kub-profile-btn" onclick="toggleProfileMenu()">
+        <img src="https://via.placeholder.com/40" class="kub-profile-img">
+        <span class="kub-profile-name">Madonna F. Bilyeu</span>
+    </div>
+
+    <div id="kubProfileMenu" class="kub-profile-menu">
+        <a class="item">My Profile</a>
+        <a class="item">Security</a>
+        <a class="item">Settings</a>
+        <a class="item logout">Logout</a>
+    </div>
+</div>
+
+<style>
+    .kub-profile-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .kub-profile-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .kub-profile-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #d4af37;
+    }
+
+    .kub-profile-name {
+        color: #fff;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .kub-profile-menu {
+        position: absolute;
+        top: 55px;
+        right: 0;
+        width: 180px;
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        border-radius: 10px;
+        display: none;
+        flex-direction: column;
+        z-index: 9999;
+    }
+
+    .kub-profile-menu .item {
+        padding: 12px 15px;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid #2a2a2d;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .kub-profile-menu .item:hover {
+        background: #1a1f2b;
+    }
+
+    .kub-profile-menu .logout {
+        color: #d4af37;
+        font-weight: 700;
+    }
+</style>
+
+<script>
+    function toggleProfileMenu() {
+        const menu = document.getElementById('kubProfileMenu');
+        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const menu = document.getElementById('kubProfileMenu');
+        const btn = document.querySelector('.kub-profile-btn');
+
+        if (!btn.contains(e.target)) {
+            menu.style.display = 'none';
+        }
+    });
+</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KeystoneUB — Dashboard</title>
@@ -163,8 +252,333 @@ dashboard.html
         <p>Fraud Radar: Clear</p>
     </div>
 </div>
+<!-- SUPPORT & MESSAGES CENTER -->
+<section class="kub-support-center">
+    <h2 class="kub-section-title">Support & Secure Messages</h2>
 
-</body>
+    <div class="kub-support-layout">
+
+        <!-- LEFT SIDE: MENU -->
+        <div class="kub-support-menu">
+            <div class="menu-item active" onclick="openSupportTab('inbox')">📥 Inbox</div>
+            <div class="menu-item" onclick="openSupportTab('sent')">📤 Sent</div>
+            <div class="menu-item" onclick="openSupportTab('tickets')">🎫 Support Tickets</div>
+            <div class="menu-item" onclick="openSupportTab('upload')">📄 Upload Documents</div>
+            <div class="menu-item" onclick="openSupportTab('contact')">💬 Contact Support</div>
+        </div>
+<!-- SUBSCRIPTIONS MANAGER -->
+<section class="kub-subscriptions">
+    <h2 class="kub-section-title">Subscriptions Manager</h2>
+
+    <div class="kub-sub-header">
+        <p class="total">Monthly Total: <span>$89.97</span></p>
+        <button class="add-sub-btn">+ Add Subscription</button>
+    </div>
+
+    <div class="kub-sub-list">
+
+        <!-- Subscription 1 -->
+        <div class="sub-item">
+            <div class="left">
+                <h3>Netflix</h3>
+                <p>$15.49 • Renews May 28</p>
+            </div>
+            <span class="tag entertainment">Entertainment</span>
+            <button class="cancel-btn">Cancel</button>
+        </div>
+
+        <!-- Subscription 2 -->
+        <div class="sub-item">
+            <div class="left">
+                <h3>Spotify</h3>
+                <p>$9.99 • Renews May 20</p>
+            </div>
+            <span class="tag music">Music</span>
+            <button class="cancel-btn">Cancel</button>
+        </div>
+
+        <!-- Subscription 3 -->
+        <div class="sub-item">
+            <div class="left">
+                <h3>iCloud Storage</h3>
+                <p>$2.99 • Renews May 17</p>
+            </div>
+            <span class="tag storage">Storage</span>
+            <button class="cancel-btn">Cancel</button>
+        </div>
+
+        <!-- Subscription 4 -->
+        <div class="sub-item">
+            <div class="left">
+                <h3>Adobe Creative Cloud</h3>
+                <p>$61.50 • Renews June 1</p>
+            </div>
+            <span class="tag tools">Tools</span>
+            <button class="cancel-btn">Cancel</button>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .kub-subscriptions {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 12px;
+    }
+
+    .kub-subscriptions h2 {
+        color: #d4af37;
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .kub-sub-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .kub-sub-header .total {
+        color: #fff;
+        font-size: 16px;
+    }
+
+    .kub-sub-header .total span {
+        color: #d4af37;
+        font-weight: 700;
+    }
+
+    .add-sub-btn {
+        background: #d4af37;
+        color: #0d0d0f;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .kub-sub-list .sub-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #0d0d0f;
+        border: 1px solid #2a2a2d;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        gap: 10px;
+    }
+
+    .sub-item h3 {
+        color: #fff;
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .sub-item p {
+        color: #bfbfbf;
+        margin: 3px 0 0;
+        font-size: 13px;
+    }
+
+    .tag {
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #0d0d0f;
+    }
+
+    .tag.entertainment { background: #d4af37; }
+    .tag.music { background: #b8962f; }
+    .tag.storage { background: #8c7830; }
+        <!-- RIGHT SIDE: CONTENT -->
+        <div class="kub-support-content">
+
+            <!-- INBOX -->
+            <div id="tab-inbox" class="tab active">
+                <h3>Inbox</h3>
+
+                <div class="msg-item">
+                    <h4>Account Verification Completed</h4>
+                    <p>Your identity verification for Madonna F. Bilyeu is now complete.</p>
+                    <span class="date">Today • 9:12 AM</span>
+                </div>
+
+                <div class="msg-item">
+                    <h4>Document Received</h4>
+                    <p>Your uploaded
+</body><!-- DOCUMENT VAULT -->
+<section class="kub-docvault">
+    <h2 class="kub-section-title">Document Vault</h2>
+
+    <!-- CATEGORY FILTERS -->
+    <div class="kub-doc-filters">
+        <button class="filter-btn active" onclick="openDocCategory('all')">All</button>
+        <button class="filter-btn" onclick="openDocCategory('statements')">Statements</button>
+        <button class="filter-btn" onclick="openDocCategory('tax')">Tax Forms</button>
+        <button class="filter-btn" onclick="openDocCategory('verification')">Verification</button>
+        <button class="filter-btn" onclick="openDocCategory('uploads')">Uploaded</button>
+    </div>
+
+    <!-- DOCUMENT LIST -->
+    <div class="kub-doc-list">
+
+        <!-- Statement -->
+        <div class="doc-item statements">
+            <div class="left">
+                <h3>May 2026 Statement</h3>
+                <p>PDF • Added May 1</p>
+            </div>
+            <button class="doc-btn">View</button>
+        </div>
+
+        <!-- Tax Form -->
+        <div class="doc-item tax">
+            <div class="left">
+                <h3>W‑9 Tax Form</h3>
+                <p>PDF • Added April 12</p>
+            </div>
+            <button class="doc-btn">Download</button>
+        </div>
+
+        <!-- Verification -->
+        <div class="doc-item verification">
+            <div class="left">
+                <h3>Driver’s License</h3>
+                <p>JPG • Verified</p>
+            </div>
+            <button class="doc-btn">View</button>
+        </div>
+
+        <!-- Uploaded -->
+        <div class="doc-item uploads">
+            <div class="left">
+                <h3>Utility Bill</h3>
+                <p>PDF • Pending Review</p>
+            </div>
+            <button class="doc-btn">View</button>
+        </div>
+
+    </div>
+
+    <!-- UPLOAD BOX -->
+    <div class="kub-upload-box">
+        <p>Drag & Drop or Click to Upload</p>
+        <input type="file" class="upload-input">
+    </div>
+
+</section>
+
+<style>
+    .kub-docvault {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 12px;
+    }
+
+    .kub-docvault h2 {
+        color: #d4af37;
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .kub-doc-filters {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .filter-btn {
+        background: #0d0d0f;
+        border: 1px solid #2a2a2d;
+        color: #fff;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .filter-btn.active {
+        background: #d4af37;
+        color: #0d0d0f;
+        font-weight: 700;
+    }
+
+    .kub-doc-list .doc-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #0d0d0f;
+        border: 1px solid #2a2a2d;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+
+    .doc-item h3 {
+        color: #fff;
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .doc-item p {
+        color: #bfbfbf;
+        margin: 3px 0 0;
+        font-size: 13px;
+    }
+
+    .doc-btn {
+        background: #d4af37;
+        color: #0d0d0f;
+        padding: 8px 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .kub-upload-box {
+        margin-top: 20px;
+        padding: 25px;
+        border: 2px dashed #2a2a2d;
+        border-radius: 12px;
+        text-align: center;
+        color: #bfbfbf;
+        cursor: pointer;
+        background: #0d0d0f;
+    }
+
+    .upload-input {
+        display: none;
+    }
+</style>
+
+<script>
+    function openDocCategory(cat) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        document.querySelectorAll('.doc-item').forEach(item => {
+            if (cat === 'all') {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = item.classList.contains(cat) ? 'flex' : 'none';
+            }
+        });
+    }
+</script>
     <!-- ACCOUNT SUMMARY CARDS -->
 <section class="kub-accounts">
     <div class="kub-account-card">
@@ -414,4 +828,240 @@ dashboard.html
             }
         }
     });
-                </script>
+                </script> 
+          <!-- CREDIT SCORE WIDGET -->
+<section class="kub-credit-score">
+    <h2 class="kub-section-title">Credit Score</h2>
+
+    <div class="kub-score-container">
+        <canvas id="creditScoreGauge"></canvas>
+
+        <div class="kub-score-value">
+            <span class="score-number">742</span>
+            <span class="score-label">Good</span>
+        </div>
+    </div>
+
+    <p class="kub-score-details">
+        Payment History: Excellent • Utilization: 23% • Updated: Today
+    </p>
+</section>
+
+<style>
+    .kub-credit-score {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 12px;
+    }
+
+    .kub-credit-score h2 {
+        color: #d4af37;
+        margin-bottom: 15px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .kub-score-container {
+        position: relative;
+        width: 220px;
+        height: 220px;
+        margin: 0 auto;
+    }
+
+    .kub-score-value {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .kub-score-value .score-number {
+        <!-- BILL PAY SECTION -->
+<section class="kub-billpay">
+    <h2 class="kub-section-title">Bill Pay</h2>
+
+    <div class="kub-billpay-list">
+
+        <!-- Payee 1 -->
+        <div class="bill-item">
+            <div class="left">
+                <h3>Con Edison</h3>
+                <p>Next Payment: May 28 • $142.00</p>
+            </div>
+            <button class="pay-btn">Pay Now</button>
+        </div>
+
+        <!-- Payee 2 -->
+        <div class="bill-item">
+            <div class="left">
+                <h3>Spectrum Internet</h3>
+                <p>Next Payment: May 20 • $89.99</p>
+            </div>
+            <button class="pay-btn">Pay Now</button>
+        </div>
+
+        <!-- Payee 3 -->
+        <div class="bill-item">
+            <div class="left">
+                <h3>AT&T Mobile</h3>
+                <p>Next Payment: May 17 • $120.00</p>
+            </div>
+            <button class="pay-btn">Pay Now</button>
+        </div>
+
+        <!-- Payee 4 -->
+        <div class="bill-item">
+            <div class="left">
+                <h3>Chase Auto Loan</h3>
+                <p>Next Payment: June 1 • $410.00</p>
+            </div>
+            <button class="pay-btn">Pay Now</button>
+        </div>
+
+        <!-- Payee 5 -->
+        <div class="bill-item">
+            <div class="left">
+                <h3>NYC Water</h3>
+                <p>Next Payment: June 10 • $64.50</p>
+            </div>
+            <button class="pay-btn">Pay Now</button>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .kub-billpay {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 12px;
+<!-- LOANS OVERVIEW -->
+<section class="kub-loans">
+    <h2 class="kub-section-title">Loans Overview</h2>
+
+    <div class="kub-loan-card">
+        <div class="loan-header">
+            <h3>Auto Loan — Chase</h3>
+            <span class="loan-status">Active</span>
+        </div>
+
+        <div class="loan-details">
+            <p><strong>Balance:</strong> $12,480.00</p>
+            <p><strong>APR:</strong> 4.9%</p>
+            <p><strong>Next Payment:</strong> June 1 • $410.00</p>
+        </div>
+
+        <div class="loan-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 62%;"></div>
+            </div>
+            <p class="progress-label">62% Paid</p>
+        </div>
+
+        <button class="loan-btn">View Details</button>
+    </div>
+
+</section>
+
+<style>
+    .kub-loans {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 12px;
+    }
+
+    .kub-loans h2 {
+        color: #d4af37;
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .kub-loan-card {
+        background: #0d0d0f;
+        border: 1px solid #2a2a2d;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .loan-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .loan-header h3 {
+        color: #fff;
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .loan-status {
+        background: #d4af37;
+        color: #0d0d0f;
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .loan-details p {
+        color: #bfbfbf;
+        margin: 5px 0;
+        font-size: 14px;
+    }
+
+    .loan-details strong {
+        color: #fff;
+    }
+
+    .loan-progress {
+        margin: 15px 0;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 10px;
+        background: #2a2a2d;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: #d4af37;
+        border-radius: 10px;
+    }
+
+    .progress-label {
+        color: #fff;
+        margin-top: 8px;
+        font-size: 13px;
+        text-align: right;
+    }
+
+    .loan-btn {
+        background: #d4af37;
+        color: #0d0d0f;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 14px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .loan-btn:hover {
+        background: #b8962f;
+    }
+</style>
