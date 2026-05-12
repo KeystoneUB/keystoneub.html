@@ -176,6 +176,81 @@ dashboard.html
     .kub-account-card .label {
         font-size: 14px;
         color: #cfcfcf;
-    }
+    }<!-
 </style>
-</html>
+</html> 
+- TRANSACTION LIST -->
+<section class="kub-transactions">
+    <h2 class="kub-section-title">Recent Transactions</h2>
+
+    <div class="kub-transaction">
+        <div class="left">
+            <p class="title">Transfer from NFCU Savings</p>
+            <p class="date">May 10, 2026</p>
+        </div>
+        <div class="amount positive">+ $30,000.00</div>
+    </div>
+
+    <div class="kub-transaction">
+        <div class="left">
+            <p class="title">Virtual Card Activation</p>
+            <p class="date">May 9, 2026</p>
+        </div>
+        <div class="amount neutral">Completed</div>
+    </div>
+
+    <div class="kub-transaction">
+        <div class="left">
+            <p class="title">Chipotle</p>
+            <p class="date">May 8, 2026</p>
+        </div>
+        <div class="amount negative">- $14.82</div>
+    </div>
+</section>
+
+<style>
+    .kub-transactions {
+        padding: 20px;
+        margin-top: 10px;
+    }
+
+    .kub-section-title {
+        color: #d4af37;
+        font-size: 20px;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    .kub-transaction {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .kub-transaction .title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        margin: 0;
+    }
+
+    .kub-transaction .date {
+        font-size: 13px;
+        color: #bfbfbf;
+        margin: 3px 0 0;
+    }
+
+    .kub-transaction .amount {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .positive { color: #4caf50; }
+    .negative { color: #ff5252; }
+    .neutral { color: #d4af37; }
+</style>
