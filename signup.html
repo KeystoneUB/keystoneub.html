@@ -1,0 +1,137 @@
+signup.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KeystoneUB — Create Account</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b0d10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #fff;
+    }
+
+    .signup-container {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 40px;
+        width: 380px;
+        border-radius: 14px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.4);
+        animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 26px;
+        font-weight: 800;
+        color: #d4af37;
+    }
+
+    .input-group {
+        margin-bottom: 18px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #d4af37;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #2a2a2d;
+        background: #0d0f14;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .signup-btn {
+        width: 100%;
+        padding: 12px;
+        background: #d4af37;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #0b0d10;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .signup-btn:hover {
+        background: #b8962f;
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 13px;
+        color: #bfbfbf;
+        cursor: pointer;
+    }
+
+    .login-link:hover {
+        color: #d4af37;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="signup-container">
+    <div class="logo">KeystoneUB</div>
+
+    <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter your full name">
+    </div>
+
+    <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="Enter your email">
+    </div>
+
+    <div class="input-group">
+        <label>Create Username</label>
+        <input type="text" placeholder="Choose a username">
+    </div>
+
+    <div class="input-group">
+        <label>Create Password</label>
+        <input type="password" placeholder="Choose a password">
+    </div>
+
+    <button class="signup-btn" onclick="createAccount()">Create Account</button>
+
+    <div class="login-link" onclick="goLogin()">Already have an account? Sign In</div>
+</div>
+
+<script>
+    function createAccount() {
+        window.location.href = "dashboard.html"; 
+    }
+
+    function goLogin() {
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
