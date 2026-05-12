@@ -93,4 +93,91 @@ savings.html
     }
 
     .transactions h3 {
-        margin
+        margin-bottom: 10px;
+        color: #d4af37;
+    }
+
+    .transaction-item {
+        background: #111622;
+        border: 1px solid #2a2a2d;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .transaction-item p {
+        margin: 0;
+    }
+
+    .amount-pos {
+        color: #4caf50;
+        font-weight: 700;
+    }
+
+    .amount-neg {
+        color: #e53935;
+        font-weight: 700;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="back-btn" onclick="goBack()">← Back</div>
+    <div class="title">Savings Account</div>
+</div>
+
+<!-- ACCOUNT SUMMARY -->
+<div class="account-summary">
+    <h2>Keystone Savings •••• 9281</h2>
+
+    <div class="balance">$4,820.55</div>
+
+    <div class="sub-info">Available Balance: $4,820.55</div>
+    <div class="sub-info">APY: 3.75%</div>
+    <div class="sub-info">Interest Earned YTD: $42.18</div>
+
+    <div class="quick-actions">
+        <div class="action-btn">Transfer</div>
+        <div class="action-btn">Deposit</div>
+        <div class="action-btn">Statements</div>
+    </div>
+</div>
+
+<!-- TRANSACTIONS -->
+<div class="transactions">
+    <h3>Recent Activity</h3>
+
+    <div class="transaction-item">
+        <p>Transfer from Checking</p>
+        <span class="amount-pos">+ $200.00</span>
+    </div>
+
+    <div class="transaction-item">
+        <p>Interest Payment</p>
+        <span class="amount-pos">+ $3.12</span>
+    </div>
+
+    <div class="transaction-item">
+        <p>ATM Withdrawal</p>
+        <span class="amount-neg">- $40.00</span>
+    </div>
+
+    <div class="transaction-item">
+        <p>Deposit</p>
+        <span class="amount-pos">+ $150.00</span>
+    </div>
+</div>
+
+<script>
+    function goBack() {
+        window.location.href = "dashboard.html";
+    }
+</script>
+
+</body>
+</html>
