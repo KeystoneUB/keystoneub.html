@@ -1,661 +1,214 @@
 dashboard.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Keystone Ultimate Bank — Dashboard</title>
-
-    <style>
-        /* ================================
-           KEYSTONEUB — GLOBAL BASE STYLES
-           ================================ */
-        :root {
-            --kub-bg: #050711;
-            --kub-surface: #0b0f1a;
-            --kub-surface-alt: #111622;
-            --kub-border: #1f2433;
-            --kub-gold: #d4af37;
-            --kub-gold-soft: #f7e7a1;
-            --kub-text-main: #ffffff;
-            --kub-text-muted: #9ca3af;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-                "Segoe UI", sans-serif;
-        }
-
-        body {
-            background: radial-gradient(circle at top, #111622 0, #050711 55%, #020308 100%);
-            color: var(--kub-text-main);
-            min-height: 100vh;
-            display: flex;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* ================================
-           KEYSTONEUB — LAYOUT
-           ================================ */
-        .kub-sidebar {
-            width: 260px;
-            background: #050814;
-            border-right: 1px solid var(--kub-border);
-            padding: 24px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .kub-logo {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--kub-text-main);
-        }
-
-        .kub-nav-section-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--kub-text-muted);
-            margin-bottom: 8px;
-        }
-
-        .kub-nav-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .kub-nav-item {
-            padding: 8px 10px;
-            border-radius: 8px;
-            color: var(--kub-text-muted);
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-        }
-
-        .kub-nav-item span {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .kub-nav-item.active,
-        .kub-nav-item:hover {
-            background: #101524;
-            color: var(--kub-text-main);
-            transform: translateX(2px);
-        }
-
-        .kub-main {
-            flex: 1;
-            padding: 24px 28px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .kub-main-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .kub-main-title-block {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .kub-main-title {
-            font-size: 22px;
-            font-weight: 700;
-        }
-
-        .kub-main-subtitle {
-            font-size: 13px;
-            color: var(--kub-text-muted);
-        }
-
-        .kub-profile-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .kub-profile-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .kub-profile-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid var(--kub-gold);
-            object-fit: cover;
-        }
-
-        .kub-profile-name {
-            color: #fff;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .kub-profile-tier {
-            font-size: 11px;
-            color: var(--kub-text-muted);
-        }
-
-        .kub-profile-menu {
-            position: absolute;
-            top: 55px;
-            right: 0;
-            width: 180px;
-            background: #111622;
-            border: 1px solid #2a2a2d;
-            border-radius: 10px;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .kub-profile-menu a {
-            padding: 10px 12px;
-            font-size: 13px;
-            color: var(--kub-text-muted);
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-
-        .kub-profile-menu a:hover {
-            background: #181d2a;
-            color: #fff;
-        }
-
-        .kub-grid {
-            display: grid;
-            grid-template-columns: 2.1fr 1.4fr;
-            gap: 20px;
-        }
-
-        .kub-column {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .kub-section {
-            background: var(--kub-surface);
-            border-radius: 14px;
-            border: 1px solid var(--kub-border);
-            padding: 16px 18px;
-        }
-
-        .kub-section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .kub-section-title {
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .kub-section-subtitle {
-            font-size: 12px;
-            color: var(--kub-text-muted);
-        }
-
-        .kub-section-link {
-            font-size: 12px;
-            color: var(--kub-gold-soft);
-            cursor: pointer;
-        }
-
-        .kub-account-card,
-        .kub-loan-card,
-        .reward-card,
-        .bill-item,
-        .sub-item,
-        .doc-item {
-            background: var(--kub-surface-alt);
-            border-radius: 12px;
-            border: 1px solid var(--kub-border);
-            padding: 12px 14px;
-        }
-
-        .kub-account-card-main {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .kub-account-label {
-            font-size: 12px;
-            color: var(--kub-text-muted);
-        }
-
-        .kub-account-balance {
-            font-size: 22px;
-            font-weight: 700;
-        }
-
-        .kub-account-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: var(--kub-text-muted);
-        }
-
-        .kub-quick-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .kub-quick-actions .action {
-            font-size: 12px;
-            color: var(--kub-text-muted);
-            cursor: pointer;
-        }
-
-        .kub-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 8px;
-            border-radius: 999px;
-            background: #101524;
-            font-size: 11px;
-            color: var(--kub-text-muted);
-        }
-
-        .kub-pill-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--kub-gold);
-        }
-
-        .kub-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .kub-row + .kub-row {
-            margin-top: 8px;
-        }
-
-        .kub-label {
-            font-size: 12px;
-            color: var(--kub-text-muted);
-        }
-
-        .kub-value {
-            font-size: 13px;
-        }
-
-        .kub-progress {
-            width: 100%;
-            height: 6px;
-            border-radius: 999px;
-            background: #151a26;
-            overflow: hidden;
-            margin-top: 6px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #b68b2e, #d4af37, #f7e7a1);
-            width: 0;
-        }
-
-        .kub-tag {
-            font-size: 11px;
-            padding: 3px 7px;
-            border-radius: 999px;
-            background: #151a26;
-            color: var(--kub-text-muted);
-        }
-
-        .kub-table {
-            width: 100%;
-            border-spacing: 0;
-            font-size: 12px;
-            margin-top: 6px;
-        }
-
-        .kub-table th {
-            text-align: left;
-            color: var(--kub-text-muted);
-            font-weight: 500;
-            padding: 6px 0;
-        }
-
-        .kub-table td {
-            padding: 6px 0;
-            border-top: 1px solid #151a26;
-        }
-
-        .kub-table td:last-child,
-        .kub-table th:last-child {
-            text-align: right;
-        }
-
-        .kub-doc-list,
-        .kub-sub-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 6px;
-        }
-
-        .doc-item-title,
-        .sub-item-title {
-            font-size: 13px;
-        }
-
-        .doc-item-meta,
-        .sub-item-meta {
-            font-size: 11px;
-            color: var(--kub-text-muted);
-            margin-top: 2px;
-        }
-
-        .kub-actions-row {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        button,
-        .pay-btn,
-        .cancel-btn,
-        .doc-btn,
-        .add-sub-btn {
-            border-radius: 999px;
-            padding: 7px 14px;
-            font-size: 12px;
-            cursor: pointer;
-            background: #151a26;
-            color: #fff;
-        }
-
-        .cancel-btn {
-            background: transparent;
-            border: 1px solid #2a2a2d;
-            color: var(--kub-text-muted);
-        }
-
-        /* ================================
-           KEYSTONEUB — GOLD SHIMMER EFFECTS
-           ================================ */
-
-        @keyframes goldShimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        .shimmer {
-            background: linear-gradient(
-                120deg,
-                #d4af37 0%,
-                #f7e7a1 20%,
-                #d4af37 40%,
-                #b68b2e 60%,
-                #d4af37 80%
-            );
-            background-size: 200% 100%;
-            animation: goldShimmer 2.2s linear infinite;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .shimmer-border {
-            position: relative;
-            overflow: hidden;
-        }
-        .shimmer-border::after {
-            content: "";
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(
-                120deg,
-                transparent,
-                rgba(212,175,55,0.4),
-                transparent
-            );
-            background-size: 200% 100%;
-            animation: goldShimmer 3s linear infinite;
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .shimmer-btn {
-            background: linear-gradient(
-                120deg,
-                #d4af37,
-                #f7e7a1,
-                #d4af37
-            );
-            background-size: 200% 100%;
-            animation: goldShimmer 2.5s linear infinite;
-            color: #000;
-            font-weight: 700;
-            border: none;
-        }
-
-        /* ================================
-           KEYSTONEUB — GLOBAL UI ANIMATIONS
-           ================================ */
-
-        body {
-            animation: fadeIn 0.6s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card,
-        .kub-account-card,
-        .kub-loan-card,
-        .reward-card,
-        .bill-item,
-        .sub-item,
-        .doc-item {
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-        .card:hover,
-        .kub-account-card:hover,
-        .kub-loan-card:hover,
-        .reward-card:hover,
-        .bill-item:hover,
-        .sub-item:hover,
-        .doc-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-        }
-
-        button,
-        .pay-btn,
-        .cancel-btn,
-        .doc-btn,
-        .add-sub-btn {
-            transition: background 0.25s ease, box-shadow 0.25s ease;
-        }
-        button:hover,
-        .pay-btn:hover,
-        .cancel-btn:hover,
-        .doc-btn:hover,
-        .add-sub-btn:hover {
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
-        }
-
-        .kub-sidebar {
-            animation: slideIn 0.4s ease-out;
-        }
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(12px);
-            animation: revealAnim 0.6s ease forwards;
-        }
-        @keyframes revealAnim {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .kub-quick-actions .action {
-            transition: transform 0.2s ease, color 0.2s ease;
-        }
-        .kub-quick-actions .action:hover {
-            transform: scale(1.08);
-            color: var(--kub-gold);
-        }
-
-        .doc-item {
-            transition: background 0.25s ease, transform 0.25s ease;
-        }
-        .doc-item:hover {
-            background: #1a1f2b;
-            transform: translateX(4px);
-        }
-
-        .sub-item {
-            transition: transform 0.25s ease, background 0.25s ease;
-        }
-        .sub-item:hover {
-            transform: translateY(-3px);
-            background: #1a1f2b;
-        }
-
-        .progress-fill {
-            transition: width 0.8s ease-out;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s ease;
-        }
-        .faq-item.open .faq-answer {
-            max-height: 200px;
-        }
-    </style>
-</head>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Keystone Ultimate Bank — Dashboard</title><style>
+:root{--kub-bg:#050711;--kub-surface:#0b0f1a;--kub-surface-alt:#111622;--kub-border:#1f2433;--kub-gold:#d4af37;--kub-gold-soft:#f7e7a1;--kub-text-main:#fff;--kub-text-muted:#9ca3af;}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;}
+body{background:radial-gradient(circle at top,#111622 0,#050711 55%,#020308 100%);color:var(--kub-text-main);min-height:100vh;display:flex;animation:fadeIn .6s ease-out;}
+a{text-decoration:none;color:inherit;}
+.kub-sidebar{width:260px;background:#050814;border-right:1px solid var(--kub-border);padding:24px 20px;display:flex;flex-direction:column;gap:24px;animation:slideIn .4s ease-out;}
+.kub-logo{font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+.kub-nav-section-title{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--kub-text-muted);margin-bottom:8px;}
+.kub-nav-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.kub-nav-item{padding:8px 10px;border-radius:8px;color:var(--kub-text-muted);font-size:13px;display:flex;justify-content:space-between;cursor:pointer;transition:.2s;}
+.kub-nav-item:hover,.kub-nav-item.active{background:#101524;color:#fff;transform:translateX(2px);}
+.kub-main{flex:1;padding:24px 28px;display:flex;flex-direction:column;gap:24px;}
+.kub-main-header{display:flex;justify-content:space-between;align-items:center;}
+.kub-main-title{font-size:22px;font-weight:700;}
+.kub-main-subtitle{font-size:13px;color:var(--kub-text-muted);}
+.kub-profile-wrapper{position:relative;display:flex;align-items:center;cursor:pointer;}
+.kub-profile-img{width:40px;height:40px;border-radius:50%;border:2px solid var(--kub-gold);}
+.kub-profile-name{font-size:14px;font-weight:600;}
+.kub-profile-tier{font-size:11px;color:var(--kub-text-muted);}
+.kub-profile-menu{position:absolute;top:55px;right:0;width:180px;background:#111622;border:1px solid #2a2a2d;border-radius:10px;display:none;flex-direction:column;}
+.kub-profile-menu a{padding:10px 12px;font-size:13px;color:var(--kub-text-muted);}
+.kub-profile-menu a:hover{background:#181d2a;color:#fff;}
+.kub-grid{display:grid;grid-template-columns:2.1fr 1.4fr;gap:20px;}
+.kub-column{display:flex;flex-direction:column;gap:16px;}
+.kub-section{background:var(--kub-surface);border-radius:14px;border:1px solid var(--kub-border);padding:16px 18px;}
+.kub-section-header{display:flex;justify-content:space-between;margin-bottom:10px;}
+.kub-section-title{font-size:14px;font-weight:600;}
+.kub-section-subtitle{font-size:12px;color:var(--kub-text-muted);}
+.kub-section-link{font-size:12px;color:var(--kub-gold-soft);cursor:pointer;}
+.kub-account-card,.kub-loan-card,.reward-card,.sub-item,.doc-item{background:var(--kub-surface-alt);border-radius:12px;border:1px solid var(--kub-border);padding:12px 14px;transition:.25s;}
+.kub-account-card:hover,.kub-loan-card:hover,.reward-card:hover,.sub-item:hover,.doc-item:hover{transform:translateY(-4px);box-shadow:0 6px 18px rgba(0,0,0,.45);}
+.kub-account-label{font-size:12px;color:var(--kub-text-muted);}
+.kub-account-balance{font-size:22px;font-weight:700;}
+.kub-account-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--kub-text-muted);}
+.kub-quick-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+.kub-quick-actions .action{font-size:12px;color:var(--kub-text-muted);cursor:pointer;transition:.2s;}
+.kub-quick-actions .action:hover{transform:scale(1.08);color:var(--kub-gold);}
+.kub-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;background:#101524;font-size:11px;color:var(--kub-text-muted);}
+.kub-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--kub-gold);}
+.kub-row{display:flex;justify-content:space-between;align-items:center;}
+.kub-label{font-size:12px;color:var(--kub-text-muted);}
+.kub-value{font-size:13px;}
+.kub-progress{width:100%;height:6px;border-radius:999px;background:#151a26;overflow:hidden;margin-top:6px;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#b68b2e,#d4af37,#f7e7a1);transition:.8s;}
+.kub-table{width:100%;border-spacing:0;font-size:12px;margin-top:6px;}
+.kub-table th{color:var(--kub-text-muted);padding:6px 0;text-align:left;}
+.kub-table td{padding:6px 0;border-top:1px solid #151a26;}
+.kub-table td:last-child,.kub-table th:last-child{text-align:right;}
+.shimmer{background:linear-gradient(120deg,#d4af37,#f7e7a1,#d4af37,#b68b2e,#d4af37);background-size:200% 100%;animation:goldShimmer 2.2s linear infinite;-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.shimmer-border{position:relative;overflow:hidden;}
+.shimmer-border:after{content:"";position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:linear-gradient(120deg,transparent,rgba(212,175,55,.4),transparent);background-size:200% 100%;animation:goldShimmer 3s linear infinite;border-radius:inherit;z-index:-1;}
+.shimmer-btn{background:linear-gradient(120deg,#d4af37,#f7e7a1,#d4af37);background-size:200% 100%;animation:goldShimmer 2.5s linear infinite;color:#000;font-weight:700;border:none;padding:7px 14px;border-radius:999px;cursor:pointer;}
+@keyframes goldShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{transform:translateX(-20px);opacity:0}to{transform:translateX(0);opacity:1}}
+</style></head>
 
 <body>
-    <!-- SIDEBAR -->
-    <aside class="kub-sidebar">
-        <div class="kub-logo shimmer">Keystone Ultimate Bank</div>
+<aside class="kub-sidebar">
+<div class="kub-logo shimmer">Keystone Ultimate Bank</div>
+<div><div class="kub-nav-section-title">Overview</div>
+<ul class="kub-nav-list">
+<li class="kub-nav-item active"><span>Dashboard</span><span>●</span></li>
+<li class="kub-nav-item"><span>Accounts</span></li>
+<li class="kub-nav-item"><span>Cards</span></li>
+<li class="kub-nav-item"><span>Payments</span></li>
+</ul></div>
+<div><div class="kub-nav-section-title">Insights</div>
+<ul class="kub-nav-list">
+<li class="kub-nav-item"><span>Spending</span></li>
+<li class="kub-nav-item"><span>Subscriptions</span></li>
+<li class="kub-nav-item"><span>Rewards</span></li>
+</ul></div>
+</aside>
 
-        <div>
-            <div class="kub-nav-section-title">Overview</div>
-            <ul class="kub-nav-list">
-                <li class="kub-nav-item active">
-                    <span>Dashboard</span>
-                    <span>●</span>
-                </li>
-                <li class="kub-nav-item">
-                    <span>Accounts</span>
-                </li>
-                <li class="kub-nav-item">
-                    <span>Cards</span>
-                </li>
-                <li class="kub-nav-item">
-                    <span>Payments</span>
-                </li>
-            </ul>
-        </div>
+<main class="kub-main">
+<header class="kub-main-header">
+<div class="kub-main-title-block">
+<div class="kub-main-title shimmer">Welcome back, Madonna F. Bilyeu</div>
+<div class="kub-main-subtitle">Your Keystone Ultimate Bank dashboard is fully shimmer‑enabled and production‑ready.</div>
+</div>
 
-        <div>
-            <div class="kub-nav-section-title">Insights</div>
-            <ul class="kub-nav-list">
-                <li class="kub-nav-item">
-                    <span>Spending</span>
-                </li>
-                <li class="kub-nav-item">
-                    <span>Subscriptions</span>
-                </li>
-                <li class="kub-nav-item">
-                    <span>Rewards</span>
-                </li>
-            </ul>
-        </div>
-    </aside>
+<div class="kub-profile-wrapper">
+<div class="kub-profile-btn">
+<img class="kub-profile-img" src="https://via.placeholder.com/80x80"/>
+<div>
+<div class="kub-profile-name">Madonna F. Bilyeu</div>
+<div class="kub-profile-tier shimmer">Gold Member</div>
+</div>
+</div>
+</div>
+</header>
 
-    <!-- MAIN -->
-    <main class="kub-main">
-        <!-- HEADER -->
-        <header class="kub-main-header">
-            <div class="kub-main-title-block">
-                <div class="kub-main-title shimmer">Welcome back, Madonna F. Bilyeu</div>
-                <div class="kub-main-subtitle">
-                    Your Keystone Ultimate Bank dashboard is fully shimmer‑enabled and production‑ready.
-                </div>
-            </div>
+<section class="kub-grid">
+<div class="kub-column">
 
-            <div class="kub-profile-wrapper">
-                <div class="kub-profile-btn">
-                    <img class="kub-profile-img" src="https://via.placeholder.com/80x80" alt="Profile" />
-                    <div>
-                        <div class="kub-profile-name">Madonna F. Bilyeu</div>
-                        <div class="kub-profile-tier shimmer">Gold Member</div>
-                    </div>
-                </div>
-                <div class="kub-profile-menu">
-                    <a href="#">Profile</a>
-                    <a href="#">Security</a>
-                    <a href="#">Sign out</a>
-                </div>
-            </div>
-        </header>
+<section class="kub-section shimmer-border">
+<div class="kub-section-header">
+<div><div class="kub-section-title">Primary Checking</div><div class="kub-section-subtitle">Everyday spending and deposits</div></div>
+<span class="kub-tag">••• 4821</span>
+</div>
 
-        <!-- GRID -->
-        <section class="kub-grid">
-            <!-- LEFT COLUMN -->
-            <div class="kub-column">
-                <!-- PRIMARY ACCOUNT CARD -->
-                <section class="kub-section reveal shimmer-border">
-                    <div class="kub-section-header">
-                        <div>
-                            <div class="kub-section-title">Primary Checking</div>
-                            <div class="kub-section-subtitle">Everyday spending and deposits</div>
-                        </div>
-                        <span class="kub-tag">••• 4821</span>
-                    </div>
+<div class="kub-account-card shimmer-border">
+<div class="kub-account-card-main">
+<div><div class="kub-account-label">Available balance</div><div class="kub-account-balance shimmer">$30,000.00</div></div>
+<div class="kub-pill"><span class="kub-pill-dot"></span><span>Active</span></div>
+</div>
+<div class="kub-account-meta"><span>Current: $31,250.00</span><span>Updated: 2 min ago</span></div>
+</div>
 
-                    <div class="kub-account-card shimmer-border
+<div class="kub-quick-actions">
+<div class="action">Transfer</div>
+<div class="action">Pay bill</div>
+<div class="action">Deposit check</div>
+<div class="action">View statements</div>
+</div>
+</section>
+
+<section class="kub-section shimmer-border">
+<div class="kub-section-header">
+<div><div class="kub-section-title">Loan overview</div><div class="kub-section-subtitle">Track payoff progress in real time</div></div>
+<span class="kub-section-link">View all</span>
+</div>
+
+<div class="kub-loan-card shimmer-border">
+<div class="kub-row"><div><div class="kub-label">Auto Loan</div><div class="kub-value">$18,400.00 remaining</div></div><div class="kub-tag">2.9% APR</div></div>
+<div class="kub-row"><div class="kub-label">Next payment</div><div class="kub-value">$420.00 · Jun 28</div></div>
+<div class="kub-progress"><div class="progress-fill" style="width:62%;"></div></div>
+</div>
+</section>
+
+<section class="kub-section shimmer-border">
+<div class="kub-section-header">
+<div><div class="kub-section-title">Secure document vault</div><div class="kub-section-subtitle">Statements, tax docs, and agreements</div></div>
+<span class="kub-section-link">Open vault</span>
+</div>
+
+<div class="kub-doc-list">
+<div class="doc-item shimmer-border"><div class="doc-item-title">2024 Tax Summary</div><div class="doc-item-meta">PDF · Uploaded May 2 · 1.2 MB</div></div>
+<div class="doc-item shimmer-border"><div class="doc-item-title">Mortgage Agreement</div><div class="doc-item-meta">PDF · Signed Jan 14 · 2.8 MB</div></div>
+<div class="doc-item shimmer-border"><div class="doc-item-title">KeystoneUB Terms</div><div class="doc-item-meta">PDF · Updated Mar 9 · 0.6 MB</div></div>
+</div>
+
+<div class="kub-actions-row">
+<button class="shimmer-btn">Upload document</button>
+<button class="cancel-btn">Manage access</button>
+</div>
+</section>
+
+</div>
+
+<div class="kub-column">
+
+<section class="kub-section shimmer-border">
+<div class="kub-section-header">
+<div><div class="kub-section-title shimmer">Rewards & Cashback</div><div class="kub-section-subtitle">Earned across all KeystoneUB products</div></div>
+<span class="kub-section-link">View rewards</span>
+</div>
+
+<div class="reward-card shimmer-border">
+<div class="kub-row">
+<div><div class="kub-label">Points balance</div><div class="kub-value shimmer">12,500 Points</div></div>
+<div><div class="kub-label">Cashback</div><div class="kub-value shimmer">$320.00</div></div>
+</div>
+<div class="kub-row" style="margin-top:10px;"><div class="kub-label">Next statement bonus</div><div class="kub-value">+2,000 Points projected</div></div>
+</div>
+</section>
+
+<section class="kub-section shimmer-border">
+<div class="kub-section-header">
+<div><div class="kub-section-title">Subscriptions</div><div class="kub-section-subtitle">Recurring charges monitored automatically</div></div>
+<span class="kub-section-link">Manage</span>
+</div>
+
+<div class="kub-sub-list">
+<div class="sub-item shimmer-border"><div class="sub-item-title">Netflix</div><div class="sub-item-meta">$19.99 · Monthly · Next: Jun 21</div></div>
+<div class="sub-item shimmer-border"><div class="sub-item-title">Spotify</div><div class="sub-item-meta">$10.99 · Monthly · Next: Jun 25</div></div>
+<div class="sub-item shimmer-border"><div class="sub-item-title">iCloud Storage</div><div class="sub-item-meta">$2.99 · Monthly · Next: Jul 1</div></div>
+</div>
+
+<div class="kub-actions-row">
+<button class="shimmer-btn">Add subscription</button>
+<button class="cancel-btn">View insights</button>
+</div>
+</section>
+
+<section class="kub-section shimmer-border">
+<div class="kub-section-header">
+<div><div class="kub-section-title">Quick payments</div><div class="kub-section-subtitle">Recent billers and payees</div></div>
+<span class="kub-section-link">Open Bill Pay</span>
+</div>
+
+<table class="kub-table">
+<thead><tr><th>Biller</th><th>Last paid</th><th>Amount</th></tr></thead>
+<tbody>
+<tr><td>Georgia Power</td><td>Jun 3</td><td>$142.18</td></tr>
+<tr><td>AT&amp;T Fiber</td><td>May 29</td><td>$89.00</td></tr>
+<tr><td>Amex Platinum</td><td>May 26</td><td>$1,250.00</td></tr>
+</tbody>
+</table>
+
+<div class="kub-actions-row" style="margin-top:12px;">
+<button class="shimmer-btn">Pay now</button>
+<button class="cancel-btn">Schedule payment</button>
+</div>
+</section>
+
+</div>
+</section>
+
+</main>
+</body>
+</html>
