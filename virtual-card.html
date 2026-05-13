@@ -3,157 +3,307 @@ virtual-card.html
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>KeystoneUB — Virtual Card</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Card • KeystoneUB</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
         body {
             margin: 0;
-            background: #0a0f1a; /* deep navy */
-            color: #ffffff;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0f12;
+            color: #fff;
         }
 
-        header {
-            background: #111622; /* charcoal */
+        .page-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: #111317;
             padding: 20px;
-            border-bottom: 1px solid #c9a94a; /* brushed gold */
-            color: #c9a94a;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
+            border-right: 1px solid #1f2227;
         }
 
-        .container {
-            padding: 20px;
+        .sidebar h2 {
+            color: #d4af37;
+            margin-bottom: 30px;
         }
 
-        .card {
-            background: #111622;
-            border: 1px solid #c9a94a;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
+        .nav-item {
+            list-style: none;
+            margin-bottom: 18px;
         }
 
-        .card h2 {
-            margin-top: 0;
-            color: #c9a94a;
+        .nav-link {
+            color: #c9c9c9;
+            text-decoration: none;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
         }
 
-        .virtual-card-visual {
-            background: linear-gradient(135deg, #111622, #1a2233);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid #c9a94a;
-            margin-bottom: 15px;
+        .nav-link:hover {
+            color: #d4af37;
         }
 
-        .virtual-card-visual .brand {
-            font-size: 14px;
-            letter-spacing: 2px;
-            color: #c9a94a;
-            text-transform: uppercase;
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
         }
 
-        .virtual-card-visual .number {
-            margin: 20px 0 10px;
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: #b5b5b5;
+            margin-bottom: 30px;
+        }
+
+        /* Virtual Card Display */
+        .virtual-card {
+            background: linear-gradient(135deg, #1a1d22, #0f1114);
+            border: 1px solid #2a2d33;
+            border-radius: 16px;
+            padding: 30px;
+            width: 420px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .virtual-card .brand {
             font-size: 20px;
+            font-weight: 600;
+            color: #d4af37;
+        }
+
+        .virtual-card-number {
+            margin: 25px 0;
+            font-size: 22px;
             letter-spacing: 3px;
         }
 
-        .virtual-card-visual .row {
+        .virtual-card-footer {
             display: flex;
             justify-content: space-between;
             font-size: 14px;
+            color: #b5b5b5;
         }
 
-        .label {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #c9a94a;
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
-        .value {
-            font-size: 14px;
-        }
-
-        button {
-            padding: 10px 18px;
-            background: #c9a94a;
-            border: none;
-            color: #111622;
-            font-weight: bold;
+        .control-btn {
+            flex: 1;
+            background-color: #1a1d22;
+            border: 1px solid #2a2d33;
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
             cursor: pointer;
-            border-radius: 6px;
-            margin-right: 10px;
+            transition: 0.2s;
         }
 
-        button.secondary {
-            background: transparent;
-            color: #c9a94a;
-            border: 1px solid #c9a94a;
+        .control-btn:hover {
+            border-color: #d4af37;
+            color: #d4af37;
         }
 
-        a.back-link {
-            color: #c9a94a;
-            text-decoration: none;
-            font-size: 14px;
+        .control-btn i {
+            font-size: 20px;
+            margin-bottom: 8px;
+            display: block;
         }
 
-        a.back-link:hover {
-            text-decoration: underline;
+        /* Details Card */
+        .card {
+            background-color: #14171c;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #1f2227;
+            margin-bottom: 25px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #d4af37;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #1f2227;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #b5b5b5;
+        }
+
+        .detail-value {
+            font-weight: 600;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+
+        .switch input { display: none; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0;
+            right: 0; bottom: 0;
+            background-color: #444;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #d4af37;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
         }
     </style>
 </head>
 
 <body>
 
-<header>Virtual Debit Card</header>
+<div class="page-container">
 
-<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>KeystoneUB</h2>
+        <ul>
+            <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="virtual-card.html"><i class="fas fa-id-card"></i> Virtual Card</a></li>
+        </ul>
+    </div>
 
-    <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+    <!-- Main Content -->
+    <div class="content">
+        <div class="page-title">Virtual Debit Card</div>
+        <div class="page-subtitle">Your secure, instantly generated digital card</div>
 
-    <div class="card">
-        <h2>Card Details</h2>
+        <!-- Virtual Card Display -->
+        <div class="virtual-card">
+            <div class="brand">KeystoneUB Virtual Visa</div>
+            <div class="virtual-card-number">•••• •••• •••• 9921</div>
 
-        <div class="virtual-card-visual">
-            <div class="brand">KEYSTONE ULTIMATE BANK</div>
-            <div class="number">•••• •••• •••• 1234</div>
-
-            <div class="row">
-                <div>
-                    <div class="label">Cardholder</div>
-                    <div class="value">CHARLES</div>
-                </div>
-                <div>
-                    <div class="label">Expires</div>
-                    <div class="value">12/29</div>
-                </div>
-                <div>
-                    <div class="label">CVV</div>
-                    <div class="value">•••</div>
-                </div>
+            <div class="virtual-card-footer">
+                <span>VALID THRU: 04/30</span>
+                <span>CARDHOLDER: M. BILYEU</span>
             </div>
         </div>
 
-        <p>Status: <strong>Active</strong></p>
-        <p>Use this virtual card for online purchases, subscriptions, and digital wallets.</p>
+        <!-- Controls -->
+        <div class="controls">
+            <div class="control-btn" onclick="generateCard()">
+                <i class="fas fa-rotate"></i>
+                Regenerate Card
+            </div>
+            <div class="control-btn" onclick="copyCard()">
+                <i class="fas fa-copy"></i>
+                Copy Number
+            </div>
+            <div class="control-btn" onclick="toggleFreeze()">
+                <i class="fas fa-snowflake"></i>
+                Freeze Card
+            </div>
+        </div>
 
-        <button>Copy Card Number</button>
-        <button class="secondary">Show Full Details</button>
-        <button class="secondary">Freeze Card</button>
+        <!-- Card Details -->
+        <div class="card">
+            <h3>Card Details</h3>
+
+            <div class="detail-row">
+                <span class="detail-label">Card Number</span>
+                <span class="detail-value" id="cardNumber">•••• •••• •••• 9921</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="detail-label">Expiration</span>
+                <span class="detail-value">04/30</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="detail-label">CVV</span>
+                <span class="detail-value" id="cvv">•••</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="detail-label">Freeze Card</span>
+                <label class="switch">
+                    <input type="checkbox" id="freezeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+        </div>
+
     </div>
-
-    <div class="card">
-        <h2>Security</h2>
-        <p>• One‑tap freeze/unfreeze</p>
-        <p>• Device and location monitoring</p>
-        <p>• Real‑time transaction alerts</p>
-    </div>
-
 </div>
+
+<script>
+    function generateCard() {
+        const newNumber = "•••• •••• •••• " + Math.floor(1000 + Math.random() * 9000);
+        const newCVV = Math.floor(100 + Math.random() * 900);
+
+        document.getElementById("cardNumber").innerText = newNumber;
+        document.querySelector(".virtual-card-number").innerText = newNumber;
+        document.getElementById("cvv").innerText = "•••";
+    }
+
+    function copyCard() {
+        navigator.clipboard.writeText("4921 8842 9921 1120");
+        alert("Card number copied to clipboard");
+    }
+
+    function toggleFreeze() {
+        const toggle = document.getElementById("freezeToggle");
+        toggle.checked = !toggle.checked;
+    }
+</script>
 
 </body>
 </html>
