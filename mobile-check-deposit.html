@@ -1,0 +1,321 @@
+mobile-check-deposit.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Pay • KeystoneUB</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0f12;
+            color: #fff;
+        }
+
+        .page-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: #111317;
+            padding: 20px;
+            border-right: 1px solid #1f2227;
+        }
+
+        .sidebar h2 {
+            color: #d4af37;
+            margin-bottom: 30px;
+        }
+
+        .nav-item {
+            list-style: none;
+            margin-bottom: 18px;
+        }
+
+        .nav-link {
+            color: #c9c9c9;
+            text-decoration: none;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #d4af37;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: #b5b5b5;
+            margin-bottom: 30px;
+        }
+
+        /* Layout */
+        .bill-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+        }
+
+        /* Cards */
+        .card {
+            background-color: #14171c;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #1f2227;
+            margin-bottom: 25px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #d4af37;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .payee-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #1f2227;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .payee-name {
+            font-weight: 600;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #d4af37, #b68a2e);
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #2a2d33;
+            background-color: #0f1114;
+            color: #fff;
+            margin-bottom: 18px;
+            font-size: 15px;
+        }
+
+        /* Modal */
+        .modal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background-color: #14171c;
+            padding: 35px;
+            border-radius: 14px;
+            width: 420px;
+            border: 1px solid #2a2d33;
+        }
+
+        .modal-box h2 {
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 12px;
+            background: #d4af37;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>KeystoneUB</h2>
+        <ul>
+            <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="bill-pay.html"><i class="fas fa-file-invoice-dollar"></i> Bill Pay</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="page-title">Bill Pay</div>
+        <div class="page-subtitle">Manage your bills, payees, and scheduled payments</div>
+
+        <div class="bill-layout">
+
+            <!-- LEFT SIDE -->
+            <div>
+
+                <!-- Payee List -->
+                <div class="card">
+                    <h3>Payees</h3>
+
+                    <div class="payee-item">
+                        <span class="payee-name">Con Edison</span>
+                        <button class="btn" onclick="selectPayee('Con Edison')">Pay</button>
+                    </div>
+
+                    <div class="payee-item">
+                        <span class="payee-name">Spectrum Internet</span>
+                        <button class="btn" onclick="selectPayee('Spectrum Internet')">Pay</button>
+                    </div>
+
+                    <div class="payee-item">
+                        <span class="payee-name">AT&T Mobile</span>
+                        <button class="btn" onclick="selectPayee('AT&T Mobile')">Pay</button>
+                    </div>
+
+                    <button class="btn" style="margin-top:20px;" onclick="openAddPayee()">Add New Payee</button>
+                </div>
+
+                <!-- Schedule Payment -->
+                <div class="card">
+                    <h3>Schedule Payment</h3>
+
+                    <label>Payee</label>
+                    <input type="text" id="selectedPayee" placeholder="Select a payee">
+
+                    <label>Amount</label>
+                    <input type="number" id="billAmount">
+
+                    <label>Payment Date</label>
+                    <input type="date" id="billDate">
+
+                    <label>Frequency</label>
+                    <select id="billFrequency">
+                        <option>One-Time</option>
+                        <option>Monthly</option>
+                        <option>Weekly</option>
+                    </select>
+
+                    <button class="btn" onclick="submitPayment()">Submit Payment</button>
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div>
+
+                <!-- Upcoming Payments -->
+                <div class="card">
+                    <h3>Upcoming Payments</h3>
+
+                    <div class="payee-item">
+                        <span>Con Edison — $120.00</span>
+                        <span>May 20</span>
+                    </div>
+
+                    <div class="payee-item">
+                        <span>Spectrum — $89.99</span>
+                        <span>May 22</span>
+                    </div>
+                </div>
+
+                <!-- Payment History -->
+                <div class="card">
+                    <h3>Payment History</h3>
+
+                    <div class="payee-item">
+                        <span>AT&T Mobile — $65.00</span>
+                        <span>Paid May 1</span>
+                    </div>
+
+                    <div class="payee-item">
+                        <span>Con Edison — $120.00</span>
+                        <span>Paid Apr 20</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ADD PAYEE MODAL -->
+<div class="modal-bg" id="addPayeeModal">
+    <div class="modal-box">
+        <h2>Add New Payee</h2>
+
+        <label>Payee Name</label>
+        <input type="text" id="newPayeeName">
+
+        <label>Account Number</label>
+        <input type="text" id="newPayeeAccount">
+
+        <button class="modal-btn" onclick="savePayee()">Save Payee</button>
+        <button class="modal-btn" style="background:#444;" onclick="closeAddPayee()">Cancel</button>
+    </div>
+</div>
+
+<script>
+    function selectPayee(name) {
+        document.getElementById("selectedPayee").value = name;
+    }
+
+    function submitPayment() {
+        alert("Payment submitted successfully.");
+    }
+
+    function openAddPayee() {
+        document.getElementById("addPayeeModal").style.display = "flex";
+    }
+
+    function closeAddPayee() {
+        document.getElementById("addPayeeModal").style.display = "none";
+    }
+
+    function savePayee() {
+        alert("New payee added.");
+        closeAddPayee();
+    }
+</script>
+
+</body>
+  </html>
