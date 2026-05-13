@@ -1,0 +1,332 @@
+security-center.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Center • KeystoneUB</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0f12;
+            color: #fff;
+        }
+
+        .page-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: #111317;
+            padding: 20px;
+            border-right: 1px solid #1f2227;
+        }
+
+        .sidebar h2 {
+            color: #d4af37;
+            margin-bottom: 30px;
+        }
+
+        .nav-item {
+            list-style: none;
+            margin-bottom: 18px;
+        }
+
+        .nav-link {
+            color: #c9c9c9;
+            text-decoration: none;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #d4af37;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: #b5b5b5;
+            margin-bottom: 30px;
+        }
+
+        /* Cards */
+        .card {
+            background-color: #14171c;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #1f2227;
+            margin-bottom: 25px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #d4af37;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* Login Activity */
+        .activity-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #1f2227;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Device List */
+        .device-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #1f2227;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .device-item:last-child {
+            border-bottom: none;
+        }
+
+        .remove-btn {
+            background: #e74c3c;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 13px;
+        }
+
+        /* Inputs */
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #2a2d33;
+            background-color: #0f1114;
+            color: #fff;
+            margin-bottom: 18px;
+            font-size: 15px;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(90deg, #d4af37, #b68a2e);
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #000;
+            width: 100%;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .freeze-btn {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+
+        .switch input { display: none; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0;
+            right: 0; bottom: 0;
+            background-color: #444;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #d4af37;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Modal */
+        .modal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background-color: #14171c;
+            padding: 35px;
+            border-radius: 14px;
+            width: 420px;
+            border: 1px solid #2a2d33;
+            text-align: center;
+        }
+
+        .modal-box i {
+            font-size: 50px;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 12px;
+            background: #d4af37;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>KeystoneUB</h2>
+        <ul>
+            <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="security-center.html"><i class="fas fa-shield-alt"></i> Security Center</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="page-title">Security Center</div>
+        <div class="page-subtitle">Manage your login activity, devices, and account protection</div>
+
+        <!-- Login Activity -->
+        <div class="card">
+            <h3>Login Activity</h3>
+
+            <div class="activity-item">Last Login: May 12, 2026 — Manhattan, NY — Chrome Desktop</div>
+            <div class="activity-item">iPhone Login — May 10, 2026 — Washington, DC</div>
+            <div class="activity-item">No suspicious activity detected</div>
+        </div>
+
+        <!-- Device Management -->
+        <div class="card">
+            <h3>Device Management</h3>
+
+            <div class="device-item">
+                <span>Chrome Desktop — Manhattan, NY</span>
+                <button class="remove-btn">Remove</button>
+            </div>
+
+            <div class="device-item">
+                <span>iPhone 14 Pro — Washington, DC</span>
+                <button class="remove-btn">Remove</button>
+            </div>
+        </div>
+
+        <!-- 2FA -->
+        <div class="card">
+            <h3>Two‑Factor Authentication (2FA)</h3>
+
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+            <span style="margin-left:12px;">Enabled</span>
+        </div>
+
+        <!-- Password Change -->
+        <div class="card">
+            <h3>Change Password</h3>
+
+            <input type="password" placeholder="Current Password">
+            <input type="password" placeholder="New Password">
+            <input type="password" placeholder="Confirm New Password">
+
+            <button class="btn">Update Password</button>
+        </div>
+
+        <!-- Account Freeze -->
+        <div class="card">
+            <h3>Account Freeze</h3>
+
+            <p>If you suspect unauthorized access, you can freeze your account immediately.</p>
+            <button class="btn freeze-btn" onclick="freezeAccount()">Freeze Account</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal">
+    <div class="modal-box">
+        <i class="fas fa-check-circle"></i>
+        <h2>Account Frozen</h2>
+        <p>Your account has been temporarily frozen for your protection.</p>
+        <button class="modal-btn" onclick="closeModal()">Done</button>
+    </div>
+</div>
+
+<script>
+    function freezeAccount() {
+        document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
+</script>
+
+</body>
+          </html>
