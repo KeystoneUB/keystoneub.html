@@ -1,91 +1,167 @@
-credit-card.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>KeystoneUB — Credit Card</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeystoneUB Credit Card</title>
 
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #0b0d10;
-        color: #fff;
-    }
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #071022; /* Deep navy */
+            color: white;
+        }
 
-    .header {
-        padding: 20px;
-        background: #111622;
-        border-bottom: 1px solid #2a2a2d;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
+        /* Navbar */
+        .navbar {
+            background: #0d162e;
+            padding: 18px 30px;
+            border-bottom: 1px solid #d4af37;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
 
-    .back-btn {
-        background: #0d0f14;
-        border: 1px solid #2a2a2d;
-        padding: 8px 14px;
-        border-radius: 8px;
-        cursor: pointer;
-        color: #d4af37;
-        font-weight: 600;
-    }
+        .container {
+            padding: 30px;
+        }
 
-    .title {
-        font-size: 20px;
-        font-weight: 700;
-        color: #d4af37;
-    }
+        .title {
+            font-size: 26px;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 25px;
+        }
 
-    /* CARD DISPLAY */
-    .card-display {
-        background: linear-gradient(135deg, #1a1f2b, #0d0f14);
-        border: 1px solid #2a2a2d;
-        margin: 20px;
-        padding: 25px;
-        border-radius: 16px;
-        color: #fff;
-        box-shadow: 0 0 25px rgba(0,0,0,0.4);
-    }
+        /* Card Display */
+        .card-display {
+            background: linear-gradient(135deg, #0d162e, #1b2642);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #d4af37;
+            box-shadow: 0 0 25px rgba(0,0,0,0.45);
+            width: 350px;
+            margin-bottom: 30px;
+        }
 
-    .card-title {
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
+        .card-number {
+            font-size: 22px;
+            letter-spacing: 3px;
+            margin-top: 20px;
+        }
 
-    .card-number {
-        font-size: 22px;
-        letter-spacing: 3px;
-        margin: 20px 0;
-    }
+        .card-holder {
+            margin-top: 25px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
 
-    .card-row {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-        font-size: 14px;
-        color: #bfbfbf;
-    }
+        .card-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
 
-    /* BALANCE BOXES */
-    .balances {
-        margin: 20px;
-        display: grid;
-        gap: 15px;
-    }
+        /* Section Cards */
+        .section {
+            background: #0d162e;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            margin-bottom: 25px;
+        }
 
-    .balance-box {
-        background: #111622;
-        border: 1px solid #2a2a2d;
-        padding: 18px;
-        border-radius: 12px;
-    }
+        .section h3 {
+            margin: 0 0 15px 0;
+            color: #d4af37;
+            font-size: 20px;
+        }
 
-    .balance-box h3 {
-        margin: 0 0 8px;
-        font-size: 15px;
+        .toggle-btn {
+            background: #d4af37;
+            color: black;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background: #b8922c;
+        }
+
+        .danger-btn {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        .danger-btn:hover {
+            background: #cc3c3c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">Keystone Ultimate Bank</div>
+
+    <div class="container">
+
+        <div class="title">Credit Card Management</div>
+
+        <!-- Card Display -->
+        <div class="card-display">
+            <div class="card-number">**** **** **** 4821</div>
+            <div class="card-holder">CARDHOLDER</div>
+            <div class="card-name">Madonna F. Bilyeu</div>
+        </div>
+
+        <!-- Freeze Card -->
+        <div class="section">
+            <h3>Freeze / Unfreeze Card</h3>
+            <button class="toggle-btn" onclick="toggleFreeze()">Freeze Card</button>
+        </div>
+
+        <!-- Travel Mode -->
+        <div class="section">
+            <h3>Travel Mode</h3>
+            <button class="toggle-btn" onclick="toggleTravel()">Enable Travel Mode</button>
+        </div>
+
+        <!-- Security -->
+        <div class="section">
+            <h3>Security Options</h3>
+            <button class="toggle-btn">Change PIN</button>
+            <button class="toggle-btn">Replace Card</button>
+            <button class="danger-btn">Report Lost / Stolen</button>
+        </div>
+
+        <!-- Wallet Integration -->
+        <div class="section">
+            <h3>Digital Wallets</h3>
+            <button class="toggle-btn">Add to Apple Wallet</button>
+            <button class="toggle-btn">Add to Google Wallet</button>
+            <button class="toggle-btn">Add to Samsung Wallet</button>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleFreeze() {
+            alert("Your card freeze status has been updated.");
+        }
+
+        function toggleTravel() {
+            alert("Travel mode updated.");
+        }
+    </script>
+
+</body>
+</html>        font-size: 15px;
         color: #fff;
     }
 
