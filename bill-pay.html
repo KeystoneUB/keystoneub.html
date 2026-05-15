@@ -250,6 +250,150 @@ bill-pay.html
     </script>
 
 </body>
+</html>            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #0d162e;
+            padding: 30px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            width: 350px;
+        }
+
+        .modal-content h3 {
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">Keystone Ultimate Bank</div>
+
+    <div class="container">
+
+        <div class="title">Bill Pay Center</div>
+
+        <!-- Payee List -->
+        <div class="section">
+            <h3>My Payees</h3>
+
+            <div class="payee-row">
+                <span>Con Edison</span>
+                <button class="btn" onclick="openPayment('Con Edison')">Pay</button>
+            </div>
+
+            <div class="payee-row">
+                <span>Spectrum Internet</span>
+                <button class="btn" onclick="openPayment('Spectrum Internet')">Pay</button>
+            </div>
+
+            <div class="payee-row">
+                <span>AT&T Mobile</span>
+                <button class="btn" onclick="openPayment('AT&T Mobile')">Pay</button>
+            </div>
+
+            <div class="payee-row">
+                <span>Chase Auto Loan</span>
+                <button class="btn" onclick="openPayment('Chase Auto Loan')">Pay</button>
+            </div>
+
+            <div class="payee-row">
+                <span>NYC Water</span>
+                <button class="btn" onclick="openPayment('NYC Water')">Pay</button>
+            </div>
+
+            <button class="btn" onclick="openAddPayee()">Add New Payee</button>
+        </div>
+
+        <!-- Upcoming Payments -->
+        <div class="section">
+            <h3>Upcoming Payments</h3>
+            <p>No scheduled payments.</p>
+        </div>
+
+        <!-- Payment History -->
+        <div class="section">
+            <h3>Payment History</h3>
+            <p>No past payments.</p>
+        </div>
+
+    </div>
+
+    <!-- Add Payee Modal -->
+    <div class="modal" id="addPayeeModal">
+        <div class="modal-content">
+            <h3>Add New Payee</h3>
+
+            <div class="input-group">
+                <label>Payee Name</label>
+                <input type="text" placeholder="Enter name">
+            </div>
+
+            <div class="input-group">
+                <label>Account Number</label>
+                <input type="text" placeholder="Enter account number">
+            </div>
+
+            <div class="input-group">
+                <label>Billing Address</label>
+                <input type="text" placeholder="Enter address">
+            </div>
+
+            <button class="btn">Save Payee</button>
+            <button class="btn" onclick="closeAddPayee()">Close</button>
+        </div>
+    </div>
+
+    <!-- Schedule Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <h3 id="payeeTitle">Schedule Payment</h3>
+
+            <div class="input-group">
+                <label>Amount</label>
+                <input type="number" placeholder="Enter amount">
+            </div>
+
+            <div class="input-group">
+                <label>Payment Date</label>
+                <input type="date">
+            </div>
+
+            <div class="input-group">
+                <label>Memo (optional)</label>
+                <input type="text" placeholder="Add a note">
+            </div>
+
+            <button class="btn">Submit Payment</button>
+            <button class="btn" onclick="closePayment()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function openAddPayee() {
+            document.getElementById("addPayeeModal").style.display = "flex";
+        }
+
+        function closeAddPayee() {
+            document.getElementById("addPayeeModal").style.display = "none";
+        }
+
+        function openPayment(name) {
+            document.getElementById("payeeTitle").innerText = "Pay " + name;
+            document.getElementById("paymentModal").style.display = "flex";
+        }
+
+        function closePayment() {
+            document.getElementById("paymentModal").style.display = "none";
+        }
+    </script>
+
+</body>
 </html>    .summary-line {
         display: flex;
         justify-content: space-between;
