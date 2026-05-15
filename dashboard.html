@@ -10,11 +10,10 @@ dashboard.html
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #071022; /* Deep navy */
+            background: #071022;
             color: white;
         }
 
-        /* Top Navigation */
         .navbar {
             background: #0d162e;
             padding: 18px 30px;
@@ -24,92 +23,158 @@ dashboard.html
             letter-spacing: 1px;
         }
 
-        /* Welcome Header */
-        .welcome {
-            padding: 25px 30px;
-            font-size: 26px;
-            font-weight: bold;
-            color: #d4af37;
+        .container {
+            padding: 30px;
         }
 
-        /* Main Balance Card */
-        .balance-card {
-            background: #0d162e;
-            margin: 0 30px;
-            padding: 25px;
-            border-radius: 14px;
-            border: 1px solid #d4af37;
-            box-shadow: 0 0 20px rgba(0,0,0,0.4);
-            text-align: center;
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d4af37;
             margin-bottom: 25px;
         }
 
-        .balance-card h3 {
-            margin: 0;
-            font-size: 18px;
-            color: #d4af37;
-        }
-
-        .balance-card .amount {
-            font-size: 36px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
         /* Account Cards */
-        .accounts {
-            display: flex;
-            gap: 20px;
-            padding: 0 30px;
-            flex-wrap: wrap;
-        }
-
         .account-card {
             background: #0d162e;
-            flex: 1;
-            min-width: 250px;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 25px;
+            border-radius: 14px;
             border: 1px solid #d4af37;
-            box-shadow: 0 0 15px rgba(0,0,0,0.35);
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
 
-        .account-card h4 {
+        .account-card h3 {
             margin: 0;
-            font-size: 18px;
+            font-size: 20px;
             color: #d4af37;
         }
 
-        .account-card .acc-balance {
-            margin-top: 10px;
-            font-size: 24px;
+        .balance {
+            font-size: 32px;
             font-weight: bold;
+            margin-top: 10px;
         }
 
         /* Quick Actions */
         .actions {
-            margin: 30px;
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
         }
 
         .action-btn {
             flex: 1;
-            min-width: 150px;
             padding: 15px;
             background: #d4af37;
             color: black;
-            text-align: center;
+            border: none;
             border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
+            text-align: center;
         }
 
         .action-btn:hover {
             background: #b8922c;
         }
+
+        /* Transactions */
+        .section {
+            background: #0d162e;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            margin-top: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        .section h3 {
+            margin: 0 0 15px 0;
+            color: #d4af37;
+            font-size: 20px;
+        }
+
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #1a233a;
+        }
+
+        .transaction:last-child {
+            border-bottom: none;
+        }
+
+        .amount-pos {
+            color: #4dff4d;
+            font-weight: bold;
+        }
+
+        .amount-neg {
+            color: #ff4d4d;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">Keystone Ultimate Bank</div>
+
+    <div class="container">
+
+        <div class="title">Welcome Back, Charles</div>
+
+        <!-- Accounts -->
+        <div class="account-card">
+            <h3>Checking Account</h3>
+            <div class="balance">$4,210.55</div>
+        </div>
+
+        <div class="account-card">
+            <h3>Savings Account</h3>
+            <div class="balance">$7,900.00</div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="actions">
+            <button class="action-btn">Transfer Money</button>
+            <button class="action-btn">Pay Bills</button>
+            <button class="action-btn">Deposit Check</button>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="section">
+            <h3>Recent Transactions</h3>
+
+            <div class="transaction">
+                <span>Starbucks</span>
+                <span class="amount-neg">- $8.75</span>
+            </div>
+
+            <div class="transaction">
+                <span>Direct Deposit — Payroll</span>
+                <span class="amount-pos">+ $2,150.00</span>
+            </div>
+
+            <div class="transaction">
+                <span>Amazon Purchase</span>
+                <span class="amount-neg">- $129.99</span>
+            </div>
+
+            <div class="transaction">
+                <span>Transfer to Savings</span>
+                <span class="amount-neg">- $200.00</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>        }
 
         /* Transactions */
         .transactions {
