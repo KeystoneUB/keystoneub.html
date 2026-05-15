@@ -2,42 +2,172 @@ transfers.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>KeystoneUB — Transfers</title>
-<style>
-    body { margin:0; background:#0a0f1a; color:#fff; font-family:Arial; }
-    header { background:#111622; padding:20px; border-bottom:1px solid #c9a94a; color:#c9a94a; text-align:center; font-size:24px; }
-    .container { padding:20px; }
-    .card { background:#111622; border:1px solid #c9a94a; padding:20px; border-radius:10px; margin-bottom:20px; }
-    .card h2 { color:#c9a94a; margin:0 0 10px; }
-    input, select { width:100%; padding:10px; margin:10px 0; background:#0a0f1a; border:1px solid #c9a94a; color:#fff; }
-    button { padding:10px 20px; background:#c9a94a; border:none; color:#111622; font-weight:bold; cursor:pointer; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeystoneUB Transfers</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #071022; /* Deep navy */
+            color: white;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #0d162e;
+            padding: 18px 30px;
+            border-bottom: 1px solid #d4af37;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 25px;
+        }
+
+        /* Transfer Card */
+        .transfer-card {
+            background: #0d162e;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            margin-bottom: 30px;
+        }
+
+        .transfer-card h3 {
+            margin: 0 0 15px 0;
+            color: #d4af37;
+            font-size: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #d4af37;
+        }
+
+        .input-group select,
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #0b1326;
+            color: white;
+            font-size: 15px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 20px;
+            background: #d4af37;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #b8922c;
+        }
+
+        /* Success Message */
+        .success {
+            display: none;
+            background: #0d162e;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #4dff4d;
+            margin-top: 20px;
+            color: #4dff4d;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-<header>Transfers</header>
 
-<div class="container">
-    <div class="card">
-        <h2>Send Money</h2>
+    <div class="navbar">Keystone Ultimate Bank</div>
 
-        <label>From Account</label>
-        <select>
-            <option>Ultimate Checking — $30,000</option>
-        </select>
+    <div class="container">
 
-        <label>To Account</label>
-        <select>
-            <option>NFCU Savings</option>
-        </select>
+        <div class="title">Transfer Money</div>
 
-        <label>Amount</label>
-        <input type="number" placeholder="Enter amount">
+        <div class="transfer-card">
+            <h3>Internal Transfer</h3>
 
-        <button>Submit Transfer</button>
+            <div class="input-group">
+                <label>From Account</label>
+                <select id="fromAccount">
+                    <option>Checking — $4,210.55</option>
+                    <option>Savings — $7,900.00</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>To Account</label>
+                <select id="toAccount">
+                    <option>Savings — $7,900.00</option>
+                    <option>Checking — $4,210.55</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Amount</label>
+                <input type="number" id="amount" placeholder="Enter amount">
+            </div>
+
+            <div class="input-group">
+                <label>Memo (optional)</label>
+                <input type="text" id="memo" placeholder="Add a note">
+            </div>
+
+            <button class="btn" onclick="submitTransfer()">Submit Transfer</button>
+
+            <div class="success" id="successBox">
+                ✔ Transfer Successful!
+            </div>
+        </div>
+
     </div>
-</div>
+
+    <script>
+        function submitTransfer() {
+            const amount = document.getElementById("amount").value;
+
+            if (amount === "" || amount <= 0) {
+                alert("Please enter a valid amount");
+                return;
+            }
+
+            document.getElementById("successBox").style.display = "block";
+
+            setTimeout(() => {
+                document.getElementById("successBox").style.display = "none";
+            }, 3000);
+        }
+    </script>
 
 </body>
 </html>
