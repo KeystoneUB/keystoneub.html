@@ -2,111 +2,255 @@ bill-pay.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>KeystoneUB — Bill Pay</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeystoneUB Bill Pay</title>
 
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #0b0d10;
-        color: #fff;
-    }
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #071022;
+            color: white;
+        }
 
-    .header {
-        padding: 20px;
-        background: #111622;
-        border-bottom: 1px solid #2a2a2d;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
+        .navbar {
+            background: #0d162e;
+            padding: 18px 30px;
+            border-bottom: 1px solid #d4af37;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
 
-    .back-btn {
-        background: #0d0f14;
-        border: 1px solid #2a2a2d;
-        padding: 8px 14px;
-        border-radius: 8px;
-        cursor: pointer;
-        color: #d4af37;
-        font-weight: 600;
-    }
+        .container {
+            padding: 30px;
+        }
 
-    .title {
-        font-size: 20px;
-        font-weight: 700;
-        color: #d4af37;
-    }
+        .title {
+            font-size: 26px;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 25px;
+        }
 
-    .container {
-        margin: 20px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
+        .section {
+            background: #0d162e;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
 
-    .box {
-        background: #111622;
-        border: 1px solid #2a2a2d;
-        padding: 20px;
-        border-radius: 14px;
-    }
+        .section h3 {
+            margin: 0 0 15px 0;
+            color: #d4af37;
+            font-size: 20px;
+        }
 
-    .box h3 {
-        margin-top: 0;
-        color: #d4af37;
-        font-size: 18px;
-    }
+        .payee-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #1a233a;
+        }
 
-    .payee-item {
-        background: #0d0f14;
-        border: 1px solid #2a2a2d;
-        padding: 12px;
-        border-radius: 10px;
-        margin-bottom: 10px;
-    }
+        .payee-row:last-child {
+            border-bottom: none;
+        }
 
-    .input-group {
-        margin-bottom: 15px;
-    }
+        .btn {
+            padding: 12px 20px;
+            background: #d4af37;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
 
-    .input-group label {
-        display: block;
-        margin-bottom: 6px;
-        font-size: 14px;
-        color: #d4af37;
-    }
+        .btn:hover {
+            background: #b8922c;
+        }
 
-    .input-group input,
-    .input-group select {
-        width: 100%;
-        padding: 12px;
-        border-radius: 8px;
-        border: 1px solid #2a2a2d;
-        background: #0d0f14;
-        color: #fff;
-        font-size: 14px;
-    }
+        .input-group {
+            margin-bottom: 15px;
+        }
 
-    .btn {
-        width: 100%;
-        padding: 12px;
-        background: #d4af37;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 700;
-        color: #0b0d10;
-        cursor: pointer;
-        margin-top: 10px;
-    }
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #d4af37;
+        }
 
-    .btn:hover {
-        background: #b8962f;
-    }
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #0b1326;
+            color: white;
+            font-size: 15px;
+        }
 
-    .summary-line {
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #0d162e;
+            padding: 30px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            width: 350px;
+        }
+
+        .modal-content h3 {
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">Keystone Ultimate Bank</div>
+
+    <div class="container">
+
+        <div class="title">Bill Pay Center</div>
+
+        <!-- Payee List -->
+        <div class="section">
+            <h3>My Payees</h3>
+
+            <div class="payee-row">
+                <span>Con Edison</span>
+                <button class="btn" onclick="openPayment('Con Edison')">Pay</button>
+            </div>
+
+            <div class="payee-row">
+                <span>Spectrum Internet</span>
+                <button class="btn" onclick="openPayment('Spectrum Internet')">Pay</button>
+            </div>
+
+            <div class="payee-row">
+                <span>AT&T Mobile</span>
+                <button class="btn" onclick="openPayment('AT&T Mobile')">Pay</button>
+            </div>
+
+            <div class="payee-row">
+                <span>Chase Auto Loan</span>
+                <button class="btn" onclick="openPayment('Chase Auto Loan')">Pay</button>
+            </div>
+
+            <div class="payee-row">
+                <span>NYC Water</span>
+                <button class="btn" onclick="openPayment('NYC Water')">Pay</button>
+            </div>
+
+            <button class="btn" onclick="openAddPayee()">Add New Payee</button>
+        </div>
+
+        <!-- Upcoming Payments -->
+        <div class="section">
+            <h3>Upcoming Payments</h3>
+            <p>No scheduled payments.</p>
+        </div>
+
+        <!-- Payment History -->
+        <div class="section">
+            <h3>Payment History</h3>
+            <p>No past payments.</p>
+        </div>
+
+    </div>
+
+    <!-- Add Payee Modal -->
+    <div class="modal" id="addPayeeModal">
+        <div class="modal-content">
+            <h3>Add New Payee</h3>
+
+            <div class="input-group">
+                <label>Payee Name</label>
+                <input type="text" placeholder="Enter name">
+            </div>
+
+            <div class="input-group">
+                <label>Account Number</label>
+                <input type="text" placeholder="Enter account number">
+            </div>
+
+            <div class="input-group">
+                <label>Billing Address</label>
+                <input type="text" placeholder="Enter address">
+            </div>
+
+            <button class="btn">Save Payee</button>
+            <button class="btn" onclick="closeAddPayee()">Close</button>
+        </div>
+    </div>
+
+    <!-- Schedule Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <h3 id="payeeTitle">Schedule Payment</h3>
+
+            <div class="input-group">
+                <label>Amount</label>
+                <input type="number" placeholder="Enter amount">
+            </div>
+
+            <div class="input-group">
+                <label>Payment Date</label>
+                <input type="date">
+            </div>
+
+            <div class="input-group">
+                <label>Memo (optional)</label>
+                <input type="text" placeholder="Add a note">
+            </div>
+
+            <button class="btn">Submit Payment</button>
+            <button class="btn" onclick="closePayment()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function openAddPayee() {
+            document.getElementById("addPayeeModal").style.display = "flex";
+        }
+
+        function closeAddPayee() {
+            document.getElementById("addPayeeModal").style.display = "none";
+        }
+
+        function openPayment(name) {
+            document.getElementById("payeeTitle").innerText = "Pay " + name;
+            document.getElementById("paymentModal").style.display = "flex";
+        }
+
+        function closePayment() {
+            document.getElementById("paymentModal").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>    .summary-line {
         display: flex;
         justify-content: space-between;
         margin: 8px 0;
