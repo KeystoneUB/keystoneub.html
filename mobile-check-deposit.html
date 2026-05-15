@@ -4,109 +4,214 @@ mobile-check-deposit.html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bill Pay • KeystoneUB</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>KeystoneUB Mobile Check Deposit</title>
 
     <style>
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #0d0f12;
-            color: #fff;
+            font-family: Arial, sans-serif;
+            background: #071022;
+            color: white;
         }
 
-        .page-container {
-            display: flex;
-            height: 100vh;
+        .navbar {
+            background: #0d162e;
+            padding: 18px 30px;
+            border-bottom: 1px solid #d4af37;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 260px;
-            background-color: #111317;
-            padding: 20px;
-            border-right: 1px solid #1f2227;
+        .container {
+            padding: 30px;
         }
 
-        .sidebar h2 {
+        .title {
+            font-size: 26px;
+            font-weight: bold;
             color: #d4af37;
-            margin-bottom: 30px;
-        }
-
-        .nav-item {
-            list-style: none;
-            margin-bottom: 18px;
-        }
-
-        .nav-link {
-            color: #c9c9c9;
-            text-decoration: none;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.2s;
-        }
-
-        .nav-link:hover {
-            color: #d4af37;
-        }
-
-        /* Main Content */
-        .content {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-        }
-
-        .page-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .page-subtitle {
-            color: #b5b5b5;
-            margin-bottom: 30px;
-        }
-
-        /* Layout */
-        .bill-layout {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 30px;
-        }
-
-        /* Cards */
-        .card {
-            background-color: #14171c;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #1f2227;
             margin-bottom: 25px;
         }
 
-        .card h3 {
-            margin-top: 0;
+        .section {
+            background: #0d162e;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        .section h3 {
+            margin: 0 0 15px 0;
             color: #d4af37;
-            font-size: 18px;
-            margin-bottom: 20px;
+            font-size: 20px;
         }
 
-        .payee-item {
-            padding: 12px 0;
-            border-bottom: 1px solid #1f2227;
-            display: flex;
-            justify-content: space-between;
+        .input-group {
+            margin-bottom: 15px;
         }
 
-        .payee-name {
-            font-weight: 600;
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #d4af37;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #0b1326;
+            color: white;
+            font-size: 15px;
+        }
+
+        .upload-box {
+            border: 2px dashed #d4af37;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .upload-box:hover {
+            background: rgba(212,175,55,0.1);
         }
 
         .btn {
-            background: linear-gradient(90deg, #d4af37, #b68a2e);
+            padding: 12px 20px;
+            background: #d4af37;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #b8922c;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #0d162e;
+            padding: 30px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            width: 350px;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .close-btn {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        .close-btn:hover {
+            background: #cc3c3c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">Keystone Ultimate Bank</div>
+
+    <div class="container">
+
+        <div class="title">Mobile Check Deposit</div>
+
+        <!-- Deposit Section -->
+        <div class="section">
+            <h3>Deposit a Check</h3>
+
+            <div class="upload-box" onclick="document.getElementById('frontCheck').click()">
+                Upload Front of Check
+            </div>
+            <input type="file" id="frontCheck" style="display:none">
+
+            <div class="upload-box" onclick="document.getElementById('backCheck').click()">
+                Upload Back of Check
+            </div>
+            <input type="file" id="backCheck" style="display:none">
+
+            <div class="input-group">
+                <label>Deposit Amount</label>
+                <input type="number" placeholder="Enter amount">
+            </div>
+
+            <div class="input-group">
+                <label>Deposit To</label>
+                <select>
+                    <option>Checking — $4,210.55</option>
+                    <option>Savings — $7,900.00</option>
+                </select>
+            </div>
+
+            <button class="btn" onclick="openModal()">Submit Deposit</button>
+        </div>
+
+        <!-- Pending Deposits -->
+        <div class="section">
+            <h3>Pending Deposits</h3>
+            <p>No pending deposits.</p>
+        </div>
+
+        <!-- Deposit History -->
+        <div class="section">
+            <h3>Deposit History</h3>
+            <p>No previous deposits.</p>
+        </div>
+
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <h3>Deposit Submitted</h3>
+            <p>Your check has been submitted for review.</p>
+            <button class="btn close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById("confirmModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("confirmModal").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>            background: linear-gradient(90deg, #d4af37, #b68a2e);
             border: none;
             padding: 10px 16px;
             border-radius: 8px;
