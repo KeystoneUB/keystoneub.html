@@ -1,62 +1,219 @@
 profile.html
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Profile – KeystoneUB</title>
-<link rel="stylesheet" href="assets/style.css">
-<style>
-body {
-    background: #0a0f14;
-    font-family: Arial, sans-serif;
-    color: white;
-}
-.container {
-    width: 90%;
-    max-width: 600px;
-    margin: 60px auto;
-    padding: 25px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0,255,180,0.2);
-}
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: none;
-}
-button {
-    width: 100%;
-    padding: 14px;
-    background: #00e6a8;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    color: black;
-    cursor: pointer;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeystoneUB Profile</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #071022; /* Deep navy */
+            color: white;
+        }
+
+        /* Header */
+        .navbar {
+            background: #0d162e;
+            padding: 18px 30px;
+            border-bottom: 1px solid #d4af37;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 25px;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: #0d162e;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #d4af37;
+            object-fit: cover;
+        }
+
+        .profile-info h2 {
+            margin: 0;
+            font-size: 22px;
+            color: #d4af37;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+            font-size: 15px;
+        }
+
+        /* Section Cards */
+        .section {
+            background: #0d162e;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            margin-bottom: 25px;
+        }
+
+        .section h3 {
+            margin: 0 0 15px 0;
+            color: #d4af37;
+            font-size: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #d4af37;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #0b1326;
+            color: white;
+            font-size: 15px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 20px;
+            background: #d4af37;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #b8922c;
+        }
+
+        .logout {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        .logout:hover {
+            background: #cc3c3c;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Profile Settings</h2>
-    <label>Full Name</label>
-    <input type="text" value="Madonna F. Bilyeu">
+    <div class="navbar">Keystone Ultimate Bank</div>
 
-    <label>Email</label>
-    <input type="email" value="madonna@keystoneub.com">
+    <div class="container">
 
-    <label>Phone</label>
-    <input type="text" value="+1 (312) 555‑0192">
+        <div class="title">Profile Settings</div>
 
-    <label>Address</label>
-    <input type="text" value="Chicago, IL">
+        <!-- Profile Card -->
+        <div class="profile-card">
+            <img src="profile.jpg" alt="Profile Photo">
+            <div class="profile-info">
+                <h2>Madonna F. Bilyeu</h2>
+                <p>Email: Madonnabilyeu@gmail.com</p>
+                <p>Phone: +1 (541) 993‑7480</p>
+                <p>Address: 321 W Burgen St, Goldendale, WA 98620</p>
+            </div>
+        </div>
 
-    <button>Save Changes</button>
-</div>
+        <!-- Account Info -->
+        <div class="section">
+            <h3>Account Information</h3>
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" value="Madonna F. Bilyeu">
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="text" value="Madonnabilyeu@gmail.com">
+            </div>
+
+            <div class="input-group">
+                <label>Phone</label>
+                <input type="text" value="+1 (541) 993‑7480">
+            </div>
+
+            <div class="input-group">
+                <label>Address</label>
+                <input type="text" value="321 W Burgen St, Goldendale, WA 98620">
+            </div>
+
+            <button class="btn">Save Changes</button>
+        </div>
+
+        <!-- Security -->
+        <div class="section">
+            <h3>Security</h3>
+
+            <div class="input-group">
+                <label>Change Password</label>
+                <input type="password" placeholder="Enter new password">
+            </div>
+
+            <div class="input-group">
+                <label>Two‑Factor Authentication</label>
+                <input type="text" value="Enabled">
+            </div>
+
+            <button class="btn">Update Security</button>
+        </div>
+
+        <!-- Preferences -->
+        <div class="section">
+            <h3>Preferences</h3>
+
+            <div class="input-group">
+                <label>Dark Mode</label>
+                <input type="text" value="Enabled">
+            </div>
+
+            <div class="input-group">
+                <label>Notifications</label>
+                <input type="text" value="Enabled">
+            </div>
+
+            <button class="btn">Save Preferences</button>
+        </div>
+
+        <button class="btn logout">Logout</button>
+
+    </div>
 
 </body>
 </html>
