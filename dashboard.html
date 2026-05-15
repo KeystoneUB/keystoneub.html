@@ -1,194 +1,207 @@
-dashboard.html
-<!DOCTYPE html>
+dashboard.html<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KeystoneUB — Dashboard</title>
-
-    <link rel="stylesheet" href="css/style.css">
+    <title>KeystoneUB Dashboard</title>
 
     <style>
         body {
             margin: 0;
-            background: #0d0d0f;
-            font-family: 'Inter', sans-serif;
+            font-family: Arial, sans-serif;
+            background: #071022; /* Deep navy */
             color: white;
         }
 
-        .sidebar {
-            width: 260px;
-            height: 100vh;
-            background: #111114;
-            border-right: 1px solid #2a2a2d;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 30px 20px;
+        /* Top Navigation */
+        .navbar {
+            background: #0d162e;
+            padding: 18px 30px;
+            border-bottom: 1px solid #d4af37;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        .sidebar h2 {
-            color: #d4af37;
-            margin-bottom: 40px;
-            font-size: 22px;
-        }
-
-        .sidebar a {
-            display: block;
-            padding: 12px 0;
-            color: #cfcfcf;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        .sidebar a:hover {
+        /* Welcome Header */
+        .welcome {
+            padding: 25px 30px;
+            font-size: 26px;
+            font-weight: bold;
             color: #d4af37;
         }
 
-        .main {
-            margin-left: 260px;
-            padding: 40px;
-        }
-
-        .header {
-            font-size: 28px;
-            font-weight: 600;
+        /* Main Balance Card */
+        .balance-card {
+            background: #0d162e;
+            margin: 0 30px;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            text-align: center;
             margin-bottom: 25px;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: #141417;
-            border: 1px solid #2a2a2d;
-            padding: 25px;
-            border-radius: 12px;
-        }
-
-        .card h3 {
-            margin: 0 0 10px 0;
+        .balance-card h3 {
+            margin: 0;
+            font-size: 18px;
             color: #d4af37;
         }
 
-        .balance {
-            font-size: 32px;
-            font-weight: 700;
-            margin: 10px 0;
+        .balance-card .amount {
+            font-size: 36px;
+            margin-top: 10px;
+            font-weight: bold;
         }
 
-        .btn {
+        /* Account Cards */
+        .accounts {
+            display: flex;
+            gap: 20px;
+            padding: 0 30px;
+            flex-wrap: wrap;
+        }
+
+        .account-card {
+            background: #0d162e;
+            flex: 1;
+            min-width: 250px;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #d4af37;
+            box-shadow: 0 0 15px rgba(0,0,0,0.35);
+        }
+
+        .account-card h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #d4af37;
+        }
+
+        .account-card .acc-balance {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Quick Actions */
+        .actions {
+            margin: 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px;
             background: #d4af37;
             color: black;
-            padding: 10px 18px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 12px;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
+        .action-btn:hover {
+            background: #b8922c;
+        }
+
+        /* Transactions */
         .transactions {
-            margin-top: 40px;
+            margin: 30px;
         }
 
         .transactions h3 {
             color: #d4af37;
+            margin-bottom: 10px;
         }
 
         .transaction-item {
-            background: #141417;
-            border: 1px solid #2a2a2d;
-            padding: 18px;
+            background: #0d162e;
+            padding: 15px;
             border-radius: 10px;
-            margin-bottom: 12px;
+            border: 1px solid #1b2642;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
         }
 
-        .amount-pos {
-            color: #4cd964;
-            font-weight: 600;
+        .transaction-item span {
+            font-size: 15px;
         }
 
-        .amount-neg {
-            color: #ff453a;
-            font-weight: 600;
+        .credit {
+            color: #4dff4d;
+        }
+
+        .debit {
+            color: #ff4d4d;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="sidebar">
-        <h2>KeystoneUB</h2>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="checking.html">Checking</a>
-        <a href="savings.html">Savings</a>
-        <a href="credit-card.html">Credit Card</a>
-        <a href="virtual-card.html">Virtual Card</a>
-        <a href="statements.html">Statements</a>
-        <a href="internal-transfer.html">Internal Transfer</a>
-        <a href="external-transfer.html">External Transfer</a>
+    <div class="navbar">Keystone Ultimate Bank</div>
+
+    <div class="welcome">Welcome back, Madonna</div>
+
+    <div class="balance-card">
+        <h3>Total Balance</h3>
+        <div class="amount">$12,480.22</div>
     </div>
 
-    <div class="main">
-        <div class="header">Welcome back, Charles</div>
-
-        <div class="grid">
-
-            <div class="card">
-                <h3>Primary Checking</h3>
-                <div class="balance">$30,000.00</div>
-                <p>Account ending in 4821</p>
-                <a class="btn" href="checking.html">View Account</a>
-            </div>
-
-            <div class="card">
-                <h3>Savings Account</h3>
-                <div class="balance">$12,850.00</div>
-                <p>High‑yield savings</p>
-                <a class="btn" href="savings.html">View Savings</a>
-            </div>
-
-            <div class="card">
-                <h3>Visa Signature</h3>
-                <div class="balance">$1,482.33</div>
-                <p>Next payment: May 28 — $120.00</p>
-                <a class="btn" href="credit-card.html">View Card</a>
-            </div>
-
+    <div class="accounts">
+        <div class="account-card">
+            <h4>Checking Account</h4>
+            <div class="acc-balance">$4,210.55</div>
         </div>
 
-        <div class="transactions">
-            <h3>Recent Transactions</h3>
-
-            <div class="transaction-item">
-                <span>Deposit — Payroll</span>
-                <span class="amount-pos">+ $2,500.00</span>
-            </div>
-
-            <div class="transaction-item">
-                <span>Amazon Purchase</span>
-                <span class="amount-neg">- $89.99</span>
-            </div>
-
-            <div class="transaction-item">
-                <span>ATM Withdrawal</span>
-                <span class="amount-neg">- $200.00</span>
-            </div>
-
-            <div class="transaction-item">
-                <span>Transfer to Savings</span>
-                <span class="amount-neg">- $500.00</span>
-            </div>
-
+        <div class="account-card">
+            <h4>Savings Account</h4>
+            <div class="acc-balance">$7,900.00</div>
         </div>
 
+        <div class="account-card">
+            <h4>Credit Card</h4>
+            <div class="acc-balance">-$320.33</div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <div class="action-btn">Transfer</div>
+        <div class="action-btn">Pay Bill</div>
+        <div class="action-btn">Deposit</div>
+        <div class="action-btn">Statements</div>
+    </div>
+
+    <div class="transactions">
+        <h3>Recent Transactions</h3>
+
+        <div class="transaction-item">
+            <span>Amazon Purchase</span>
+            <span class="debit">-$42.99</span>
+        </div>
+
+        <div class="transaction-item">
+            <span>Payroll Deposit</span>
+            <span class="credit">+$1,200.00</span>
+        </div>
+
+        <div class="transaction-item">
+            <span>Starbucks</span>
+            <span class="debit">-$8.75</span>
+        </div>
+
+        <div class="transaction-item">
+            <span>Electric Bill</span>
+            <span class="debit">-$120.00</span>
+        </div>
     </div>
 
 </body>
-</html>>
+</html>
