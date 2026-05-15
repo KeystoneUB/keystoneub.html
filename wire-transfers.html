@@ -4,322 +4,231 @@ wire-transfers.html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wire Transfers • KeystoneUB</title>
+    <title>KeystoneUB Wire Transfers</title>
 
-    <!-- Fonts & Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- Core Styles -->
     <style>
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #0d0f12;
-            color: #fff;
+            font-family: Arial, sans-serif;
+            background: #071022;
+            color: white;
         }
 
-        .page-container {
-            display: flex;
-            height: 100vh;
+        .navbar {
+            background: #0d162e;
+            padding: 18px 30px;
+            border-bottom: 1px solid #d4af37;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 260px;
-            background-color: #111317;
-            padding: 20px;
-            border-right: 1px solid #1f2227;
+        .container {
+            padding: 30px;
         }
 
-        .sidebar h2 {
+        .title {
+            font-size: 26px;
+            font-weight: bold;
             color: #d4af37;
-            margin-bottom: 30px;
-        }
-
-        .nav-item {
-            list-style: none;
-            margin-bottom: 18px;
-        }
-
-        .nav-link {
-            color: #c9c9c9;
-            text-decoration: none;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.2s;
-        }
-
-        .nav-link:hover {
-            color: #d4af37;
-        }
-
-        /* Main Content */
-        .content {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-        }
-
-        .page-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .page-subtitle {
-            color: #b5b5b5;
-            margin-bottom: 30px;
-        }
-
-        /* Layout */
-        .transfer-layout {
-            display: grid;
-            grid-template-columns: 1.7fr 1fr;
-            gap: 30px;
-        }
-
-        /* Form Sections */
-        .section {
-            background-color: #14171c;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #1f2227;
             margin-bottom: 25px;
         }
 
-        .section h3 {
-            margin-top: 0;
-            color: #d4af37;
-            font-size: 18px;
-            margin-bottom: 20px;
+        .section {
+            background: #0d162e;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #d4af37;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
 
-        label {
+        .section h3 {
+            margin: 0 0 15px 0;
+            color: #d4af37;
+            font-size: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
             display: block;
             margin-bottom: 6px;
-            color: #c9c9c9;
+            font-size: 14px;
+            color: #d4af37;
         }
 
-        input, select, textarea {
+        .input-group input,
+        .input-group select {
             width: 100%;
             padding: 12px;
             border-radius: 8px;
-            border: 1px solid #2a2d33;
-            background-color: #0f1114;
-            color: #fff;
-            margin-bottom: 18px;
+            border: none;
+            background: #0b1326;
+            color: white;
             font-size: 15px;
         }
 
-        /* Submit Button */
-        .submit-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(90deg, #d4af37, #b68a2e);
+        .btn {
+            padding: 14px 20px;
+            background: #d4af37;
+            color: black;
             border: none;
             border-radius: 10px;
-            font-size: 17px;
-            font-weight: 600;
+            font-weight: bold;
             cursor: pointer;
-            color: #000;
+            width: 100%;
             margin-top: 10px;
+            transition: 0.3s;
         }
 
-        .submit-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* Summary Card */
-        .summary-card {
-            background-color: #14171c;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #1f2227;
-            height: fit-content;
-        }
-
-        .summary-title {
-            font-size: 18px;
-            color: #d4af37;
-            margin-bottom: 20px;
-        }
-
-        .summary-item {
-            margin-bottom: 12px;
-            font-size: 15px;
-        }
-
-        .summary-label {
-            color: #b5b5b5;
-        }
-
-        .summary-value {
-            font-weight: 600;
+        .btn:hover {
+            background: #b8922c;
         }
 
         /* Modal */
-        .modal-bg {
+        .modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.75);
-            display: none;
+            background: rgba(0,0,0,0.7);
             justify-content: center;
             align-items: center;
         }
 
-        .modal-box {
-            background-color: #14171c;
-            padding: 35px;
+        .modal-content {
+            background: #0d162e;
+            padding: 30px;
             border-radius: 14px;
-            width: 420px;
+            border: 1px solid #d4af37;
+            width: 350px;
             text-align: center;
-            border: 1px solid #2a2d33;
         }
 
-        .modal-box i {
-            font-size: 50px;
-            color: #4caf50;
-            margin-bottom: 20px;
+        .modal-content h3 {
+            color: #d4af37;
+            margin-bottom: 15px;
         }
 
-        .modal-box h2 {
-            margin-bottom: 10px;
+        .close-btn {
+            background: #ff4d4d;
+            color: white;
         }
 
-        .modal-btn {
-            margin-top: 20px;
-            padding: 12px 20px;
-            background: #d4af37;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
+        .close-btn:hover {
+            background: #cc3c3c;
         }
     </style>
 </head>
 
 <body>
 
-<div class="page-container">
+    <div class="navbar">Keystone Ultimate Bank</div>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>KeystoneUB</h2>
-        <ul>
-            <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="wire-transfers.html"><i class="fas fa-exchange-alt"></i> Wire Transfers</a></li>
-        </ul>
+    <div class="container">
+
+        <div class="title">Wire Transfers</div>
+
+        <!-- Recipient Section -->
+        <div class="section">
+            <h3>Recipient Information</h3>
+
+            <div class="input-group">
+                <label>Select Saved Recipient</label>
+                <select>
+                    <option>— Select Recipient —</option>
+                    <option>Gregory Carter</option>
+                    <option>UN Authority</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Recipient Full Name</label>
+                <input type="text" placeholder="Enter full name">
+            </div>
+
+            <div class="input-group">
+                <label>Recipient Address</label>
+                <input type="text" placeholder="Enter address">
+            </div>
+        </div>
+
+        <!-- Bank Details -->
+        <div class="section">
+            <h3>Bank Details</h3>
+
+            <div class="input-group">
+                <label>Routing Number</label>
+                <input type="text" placeholder="Enter routing number">
+            </div>
+
+            <div class="input-group">
+                <label>Account Number</label>
+                <input type="text" placeholder="Enter account number">
+            </div>
+
+            <div class="input-group">
+                <label>Bank Name</label>
+                <input type="text" placeholder="Enter bank name">
+            </div>
+        </div>
+
+        <!-- Transfer Details -->
+        <div class="section">
+            <h3>Transfer Details</h3>
+
+            <div class="input-group">
+                <label>Amount</label>
+                <input type="number" placeholder="Enter amount">
+            </div>
+
+            <div class="input-group">
+                <label>Wire Purpose</label>
+                <input type="text" placeholder="Enter purpose">
+            </div>
+
+            <div class="input-group">
+                <label>Delivery Speed</label>
+                <select>
+                    <option>Standard (1–2 business days)</option>
+                    <option>Express (Same day)</option>
+                </select>
+            </div>
+
+            <button class="btn" onclick="openModal()">Review & Submit</button>
+        </div>
+
     </div>
 
-    <!-- Main Content -->
-    <div class="content">
-        <div class="page-title">Wire Transfers</div>
-        <div class="page-subtitle">Send domestic or international wires securely</div>
-
-        <div class="transfer-layout">
-
-            <!-- LEFT SIDE: FORM -->
-            <div>
-
-                <!-- Recipient Info -->
-                <div class="section">
-                    <h3>Recipient Information</h3>
-
-                    <label>Recipient Name</label>
-                    <input type="text" id="recipientName">
-
-                    <label>Bank Name</label>
-                    <input type="text" id="bankName">
-
-                    <label>Routing Number</label>
-                    <input type="text" id="routingNumber">
-
-                    <label>Account Number</label>
-                    <input type="text" id="accountNumber">
-
-                    <label>Country</label>
-                    <select id="country">
-                        <option>United States</option>
-                        <option>Canada</option>
-                        <option>United Kingdom</option>
-                    </select>
-                </div>
-
-                <!-- Transfer Details -->
-                <div class="section">
-                    <h3>Transfer Details</h3>
-
-                    <label>Amount</label>
-                    <input type="number" id="amount">
-
-                    <label>Transfer Type</label>
-                    <select id="transferType">
-                        <option>Domestic</option>
-                        <option>International</option>
-                    </select>
-
-                    <label>Memo (Optional)</label>
-                    <textarea id="memo" rows="3"></textarea>
-                </div>
-
-                <!-- Sender Account -->
-                <div class="section">
-                    <h3>Sender Account</h3>
-
-                    <label>From Account</label>
-                    <select id="fromAccount">
-                        <option>Checking •••• 1024</option>
-                        <option>Savings •••• 8841</option>
-                    </select>
-
-                    <button class="submit-btn" onclick="submitWire()">Submit Wire Transfer</button>
-                </div>
-
-            </div>
-
-            <!-- RIGHT SIDE: SUMMARY -->
-            <div class="summary-card">
-                <div class="summary-title">Transfer Summary</div>
-
-                <div class="summary-item"><span class="summary-label">Recipient:</span> <span class="summary-value" id="sumRecipient">—</span></div>
-                <div class="summary-item"><span class="summary-label">Bank:</span> <span class="summary-value" id="sumBank">—</span></div>
-                <div class="summary-item"><span class="summary-label">Amount:</span> <span class="summary-value" id="sumAmount">—</span></div>
-                <div class="summary-item"><span class="summary-label">Type:</span> <span class="summary-value" id="sumType">—</span></div>
-            </div>
-
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <h3>Confirm Wire Transfer</h3>
+            <p>Please review your details before submitting.</p>
+            <button class="btn" onclick="submitWire()">Submit Wire</button>
+            <button class="btn close-btn" onclick="closeModal()">Cancel</button>
         </div>
     </div>
-</div>
 
-<!-- MODAL -->
-<div class="modal-bg" id="modal">
-    <div class="modal-box">
-        <i class="fas fa-check-circle"></i>
-        <h2>Wire Transfer Submitted</h2>
-        <p>Your wire has been successfully submitted.</p>
-        <button class="modal-btn" onclick="closeModal()">Done</button>
-    </div>
-</div>
+    <script>
+        function openModal() {
+            document.getElementById("confirmModal").style.display = "flex";
+        }
 
-<script>
-    function submitWire() {
-        document.getElementById("sumRecipient").innerText = document.getElementById("recipientName").value;
-        document.getElementById("sumBank").innerText = document.getElementById("bankName").value;
-        document.getElementById("sumAmount").innerText = "$" + document.getElementById("amount").value;
-        document.getElementById("sumType").innerText = document.getElementById("transferType").value;
+        function closeModal() {
+            document.getElementById("confirmModal").style.display = "none";
+        }
 
-        document.getElementById("modal").style.display = "flex";
-    }
-
-    function closeModal() {
-        document.getElementById("modal").style.display = "none";
-    }
-</script>
+        function submitWire() {
+            alert("Wire Transfer Submitted Successfully");
+            closeModal();
+        }
+    </script>
 
 </body>
-  </html>
+</html>
